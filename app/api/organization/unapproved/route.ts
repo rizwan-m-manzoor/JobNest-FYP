@@ -6,7 +6,7 @@ import {
 import connectDB from "./../../../../libs/db";
 import Organization from "./../../../../models/Organization";
 
-const Pagination = (req) => {
+const Pagination = (req: NextRequest) => {
   const page = Number(req.nextUrl.searchParams.get("page")) || 1;
   const limit = Number(req.nextUrl.searchParams.get("limit")) || 6;
   const skip = (page - 1) * limit;

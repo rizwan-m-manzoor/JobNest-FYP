@@ -29,7 +29,7 @@ export const PATCH = async (req: NextRequest) => {
       });
     }
 
-    const organizationId = req.nextUrl.searchParams.get("id");
+    const organizationId = req.url.split("/").pop();
     const findOrganization = await Organization.findById(
       organizationId
     ).populate("user");

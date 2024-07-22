@@ -30,7 +30,7 @@ export const DELETE = async (req: NextRequest) => {
       });
     }
 
-    const organizationId = req.nextUrl.searchParams.get("id");
+    const organizationId = req.url.split("/").pop();
     const organization = await Organization.findById(organizationId);
     if (!organization) {
       return new NextResponse(
