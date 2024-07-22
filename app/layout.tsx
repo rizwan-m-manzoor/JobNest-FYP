@@ -1,33 +1,36 @@
-import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import { EdgeStoreProvider } from "@/lib/edgestore";
-import Footer from "@/components/shared/Footer";
+'use client';
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "900"],
-});
+import { ReactNode, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshToken } from '../redux/slices/authSlice';
+import DataProvider, { AppDispatch } from '../redux/store';
+import Alert from '../components/general/Alert';
+import UserDescriptionModal from '../components/modal/UserDescriptionModal';
+import '../styles/globals.css';
 
-export const metadata: Metadata = {
-  title: "Workify",
-  description: "Job Board",
+interface IProps {
+  children: ReactNode;
+}
+
+const App = ({ children }: IProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
+
+  return <>{children}</>;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={raleway.className}>
-        <EdgeStoreProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </EdgeStoreProvider>
+      <body>
+        <DataProvider>
+          <Alert />
+          <UserDescriptionModal />
+          <App>{children}</App>
+        </DataProvider>
       </body>
     </html>
   );
