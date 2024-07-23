@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <>
       <Head>
-        <title>Job Seek | Home</title>
+        <title>Job Nest | Home</title>
       </Head>
       <Navbar />
       <div>

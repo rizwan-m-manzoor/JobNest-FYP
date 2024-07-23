@@ -27,7 +27,7 @@ const RecheckCVModal = ({ openModal, setOpenModal, company, position, onClick }:
   return (
     <div className={`${openModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} modal-background`}>
       <div ref={modalRef} className={`${openModal ? 'translate-y-0' : '-translate-y-12'} modal-box max-w-[550px] overflow-auto hide-scrollbar pb-10 pt-6 text-center`}>
-        <Image src={SendImage} alt='Job Seek' width={300} height={300} />
+        <Image src={SendImage} alt='Job Nest' width={300} height={300} />
         <h1>Send application to {company} as {position}?</h1>
         <div className='flex items-center gap-8 justify-center mt-7'>
           <button onClick={onClick} className='bg-green-500 hover:bg-green-600 text-sm transition-[background] text-white rounded-md px-4 py-3'>Yes, Send It</button>

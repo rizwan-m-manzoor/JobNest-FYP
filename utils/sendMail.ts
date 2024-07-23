@@ -29,7 +29,7 @@ const sendEmail = async(to: string, subject: string, html: string) => {
     const options = {
       from: process.env.MAIL_SENDER_ADDRESS,
       to,
-      subject: `Job Seek - ${subject}`,
+      subject: `Job Nest - ${subject}`,
       html
     }
 

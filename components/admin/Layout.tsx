@@ -13,7 +13,7 @@ const Layout = ({ title, pageTitle, children }: IProps) => {
   return (
     <>
       <Head>
-        <title>Job Seek | {title}</title>
+        <title>Job Nest | {title}</title>
       </Head>
       <div className='flex h-screen'>
         <Sidebar />

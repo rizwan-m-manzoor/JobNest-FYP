@@ -40,8 +40,8 @@ const Navbar = () => {
   return (
     <div className='flex items-center justify-between gap-10 lg:px-16 pl-4 pr-7 z-[999] py-3 bg-white sticky top-0 shadow-sm'>
       <div onClick={() => router.push('/')} className='flex items-center cursor-pointer'>
-        <Image src={Logo} width={60} height={60} alt='Job Seek' />
-        <h1 className='text-xl'>Job Seek</h1>
+        <Image src={Logo} width={60} height={60} alt='Job Nest' />
+        <h1 className='text-xl'>Job Nest</h1>
       </div>
       <div onClick={() => setOpenSidebar(true)} className='lg:hidden block'>
         <GiHamburgerMenu className='text-xl cursor-pointer' />
