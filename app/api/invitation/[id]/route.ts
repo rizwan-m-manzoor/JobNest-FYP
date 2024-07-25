@@ -12,14 +12,14 @@ export async function PATCH(req: NextRequest) {
 
     const user = await isAuthenticated(req);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
 
     const isAuthorize = await authorizeRoles(user._id, "jobseeker");
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -28,7 +28,7 @@ export async function PATCH(req: NextRequest) {
     if (!status) {
       return new NextResponse(
         JSON.stringify({
-          message: "Please provide new status for the invitation.",
+          msg: "Please provide new status for the invitation.",
         }),
         { status: 400 }
       );
@@ -37,7 +37,7 @@ export async function PATCH(req: NextRequest) {
     const invitationId = req.nextUrl.searchParams.get("id");
     if (!invitationId) {
       return new NextResponse(
-        JSON.stringify({ message: "Invitation ID is required." }),
+        JSON.stringify({ msg: "Invitation ID is required." }),
         { status: 400 }
       );
     }
@@ -45,7 +45,7 @@ export async function PATCH(req: NextRequest) {
     const findInvitation = await Invitation.findOne({ _id: invitationId });
     if (!findInvitation) {
       return new NextResponse(
-        JSON.stringify({ message: "Invitation not found." }),
+        JSON.stringify({ msg: "Invitation not found." }),
         { status: 404 }
       );
     }
@@ -54,14 +54,14 @@ export async function PATCH(req: NextRequest) {
 
     return new NextResponse(
       JSON.stringify({
-        message: `Invitation status has been ${status} successfully.`,
+        msg: `Invitation status has been ${status} successfully.`,
       }),
       { status: 200 }
     );
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }

@@ -12,14 +12,14 @@ export async function POST(req: NextRequest) {
 
     const user = await isAuthenticated(req);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
 
     const isAuthorize = await authorizeRoles(user._id, "admin");
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const { name, image } = await req.json();
     if (!name || !image) {
       return new NextResponse(
-        JSON.stringify({ message: "Please provide category name and image." }),
+        JSON.stringify({ msg: "Please provide category name and image." }),
         { status: 400 }
       );
     }
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     const findCategory = await Category.findOne({ name });
     if (findCategory) {
       return new NextResponse(
-        JSON.stringify({ message: `${name} category already exists.` }),
+        JSON.stringify({ msg: `${name} category already exists.` }),
         { status: 400 }
       );
     }
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse(
       JSON.stringify({
-        message: `${name} category has been created successfully.`,
+        msg: `${name} category has been created successfully.`,
         category: newCategory,
       }),
       { status: 200 }
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }

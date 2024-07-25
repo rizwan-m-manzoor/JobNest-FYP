@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (!email || !password) {
       return new NextResponse(
         JSON.stringify({
-          message: "Please provide email and password to login.",
+          msg: "Please provide email and password to login.",
         }),
         { status: 400 }
       );
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
     if (!validateEmail(email)) {
       return new NextResponse(
-        JSON.stringify({ message: "Please provide valid email address." }),
+        JSON.stringify({ msg: "Please provide valid email address." }),
         { status: 400 }
       );
     }
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     const user = await User.findOne({ email });
     if (!user) {
       return new NextResponse(
-        JSON.stringify({ message: "Invalid credential." }),
+        JSON.stringify({ msg: "Invalid credential." }),
         { status: 401 }
       );
     }
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     const isPassMatch = await bcrypt.compare(password, user.password);
     if (!isPassMatch) {
       return new NextResponse(
-        JSON.stringify({ message: "Invalid credential." }),
+        JSON.stringify({ msg: "Invalid credential." }),
         { status: 401 }
       );
     }
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse(
       JSON.stringify({
-        message: `Authorized as ${user.name}`,
+        msg: `Authorized as ${user.name}`,
         accessToken,
         refreshToken,
         user: {
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   return new NextResponse(
     JSON.stringify({
-      message: `${req.method} method is not allowed for this endpoint`,
+      msg: `${req.method} method is not allowed for this endpoint`,
     }),
     { status: 405 }
   );
@@ -81,7 +81,7 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   return new NextResponse(
     JSON.stringify({
-      message: `${req.method} method is not allowed for this endpoint`,
+      msg: `${req.method} method is not allowed for this endpoint`,
     }),
     { status: 405 }
   );
@@ -90,7 +90,7 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   return new NextResponse(
     JSON.stringify({
-      message: `${req.method} method is not allowed for this endpoint`,
+      msg: `${req.method} method is not allowed for this endpoint`,
     }),
     { status: 405 }
   );

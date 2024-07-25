@@ -19,14 +19,14 @@ export const GET = async (req: NextRequest) => {
 
     const user = await isAuthenticated(req);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
 
     const isAuthorize = await authorizeRoles(user._id, "admin");
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -63,7 +63,7 @@ export const GET = async (req: NextRequest) => {
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       {
         status: 500,
       }

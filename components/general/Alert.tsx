@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'

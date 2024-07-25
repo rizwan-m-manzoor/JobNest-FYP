@@ -16,14 +16,14 @@ export async function GET(req: NextRequest) {
 
     const user = await isAuthenticated(req);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
 
     const isAuthorize = await authorizeRoles(user._id, "organization");
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
     if (!findJob) {
       return new NextResponse(
         JSON.stringify({
-          message: `Job with ID ${id} not found within this organization`,
+          msg: `Job with ID ${id} not found within this organization`,
         }),
         { status: 404 }
       );
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }

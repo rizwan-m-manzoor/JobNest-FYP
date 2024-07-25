@@ -12,14 +12,14 @@ export async function POST(req: NextRequest) {
 
     const user = await isAuthenticated(req);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
 
     const isAuthorize = await authorizeRoles(user._id, "organization");
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const { jobId, userId } = await req.json();
     if (!jobId || !userId) {
       return new NextResponse(
-        JSON.stringify({ message: "Please provide job and user ID." }),
+        JSON.stringify({ msg: "Please provide job and user ID." }),
         { status: 400 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse(
       JSON.stringify({
-        message: "Invitation sent.",
+        msg: "Invitation sent.",
         invitation: newInvitation,
       }),
       { status: 200 }
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
 
     const user = await isAuthenticated(request);
     if (!user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      return new NextResponse(JSON.stringify({ msg: "Unauthorized" }), {
         status: 401,
       });
     }
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
       "jobseeker"
     );
     if (!isAuthorize) {
-      return new NextResponse(JSON.stringify({ message: "Forbidden" }), {
+      return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {
         status: 403,
       });
     }
@@ -129,14 +129,14 @@ export async function GET(request: NextRequest) {
       return new NextResponse(JSON.stringify({ invitations }), { status: 200 });
     } else {
       return new NextResponse(
-        JSON.stringify({ message: "Invalid user role" }),
+        JSON.stringify({ msg: "Invalid user role" }),
         { status: 403 }
       );
     }
   } catch (error) {
     console.error(error);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error" }),
+      JSON.stringify({ msg: "Internal Server Error" }),
       { status: 500 }
     );
   }

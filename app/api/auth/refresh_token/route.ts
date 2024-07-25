@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     if (!token) {
       return new NextResponse(
         JSON.stringify({
-          message: "Invalid authentication.",
+          msg: "Invalid authentication.",
         }),
         { status: 400 }
       );
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     if (!decoded.id) {
       return new NextResponse(
         JSON.stringify({
-          message: "Invalid authentication.",
+          msg: "Invalid authentication.",
         }),
         { status: 401 }
       );
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
     console.error(err);
     return new NextResponse(
       JSON.stringify({
-        message: err.message,
+        msg: err.message,
       }),
       { status: 500 }
     );
