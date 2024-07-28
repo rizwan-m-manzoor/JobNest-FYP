@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { IJobseeker } from "./../../../utils/Interface";
 import { getDataAPI } from "./../../../utils/fetchData";
 import { RootState } from "./../../../redux/store";
@@ -10,12 +10,12 @@ import Head from "next/head";
 import Navbar from "./../../../components/general/Navbar";
 import PDFViewer from "./../../../utils/PDFViewer";
 
-const JobseekerCV = () => {
+const JobseekerCV = ({ params }: { params: { id: string } }) => {
   const [data, setData] = useState<Partial<IJobseeker>>({});
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const jobseekerId = searchParams.get("id");
+
+  const jobseekerId = params.id;
   const dispatch = useDispatch();
   const { auth } = useSelector((state: RootState) => state);
 
