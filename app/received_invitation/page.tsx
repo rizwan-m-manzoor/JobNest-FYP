@@ -30,7 +30,7 @@ const ReceivedInvitation = () => {
   return (
     <>
       <Head>
-        <title>Job Seek | Received Invitation</title>
+        <title>Job Nest | Received Invitation</title>
       </Head>
       <Navbar />
       <div className="md:py-10 py-6 md:px-16 px-8">

@@ -99,7 +99,7 @@ const Jobseeker = () => {
   return (
     <>
       <Head>
-        <title>Job Seek | Jobseeker Register</title>
+        <title>Job Nest | Jobseeker Register</title>
       </Head>
       <Navbar />
       <div className="bg-[#FAFAFA] px-10 py-14">

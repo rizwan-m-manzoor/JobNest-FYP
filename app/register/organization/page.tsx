@@ -225,12 +225,12 @@ const Organization = () => {
   return (
     <>
       <Head>
-        <title>Job Seek | Organization Register</title>
+        <title>Job Nest | Organization Register</title>
       </Head>
       <Navbar />
       <div className="bg-[#FAFAFA] px-10 py-14">
         <h1 className="text-center mb-10 text-2xl font-semibold text-[#504ED7]">
-          Recruit Better With Job Seek
+          Recruit Better With Job Nest
         </h1>
         <div className="bg-white w-full max-w-[1000px] border border-gray-300 m-auto px-8 py-12">
           <form onSubmit={handleSubmit}>

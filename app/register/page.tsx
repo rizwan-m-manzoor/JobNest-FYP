@@ -22,7 +22,7 @@ const Register = () => {
   return (
     <>
       <Head>
-        <title>Job Seek | Sign Up</title>
+        <title>Job Nest | Sign Up</title>
       </Head>
       <Navbar />
       <div className="bg-[#FAFAFA] px-10 py-14">
