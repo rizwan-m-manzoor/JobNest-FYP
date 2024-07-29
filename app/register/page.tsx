@@ -11,7 +11,7 @@ import Navbar from "./../../components/general/Navbar";
 
 const Register = () => {
   const router = useRouter();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (auth.accessToken) {

@@ -24,7 +24,7 @@ const ResetPassword = ({ params }: { params: { id: string } }) => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (auth.accessToken) {
@@ -94,7 +94,7 @@ const ResetPassword = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Head>
-        <title>Job Seek | Reset Password</title>
+        <title>Job Nest | Reset Password</title>
       </Head>
       <Navbar />
       <div className="bg-[#FAFAFA] px-10 py-14">

@@ -6,16 +6,16 @@ export const uploadFile = async(files: File[], type: string) => {
 
     formData.append('file', file)
     type === 'avatar'
-    ? formData.append('upload_preset', 'erszbrb2')
+    ? formData.append('upload_preset', 'oxprgvqf')
     : type === 'cv'
-      ? formData.append('upload_preset', 'k6kmr9vg')
+      ? formData.append('upload_preset', 'js9qof0d')
       : type === 'category'
-        ? formData.append('upload_preset', 'gmlca55a')
+        ? formData.append('upload_preset', 'sebgvlmh')
         : formData.append('upload_preset', '')
-    formData.append('cloud_name', 'dpef9sjqt')
+    formData.append('cloud_name', 'dmgfdleea')
 
     try {
-      const res = await fetch('https://api.cloudinary.com/v1_1/dpef9sjqt/upload', {
+      const res = await fetch('https://api.cloudinary.com/v1_1/dmgfdleea/upload', {
         method: 'POST',
         body: formData
       })

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import {
   FormSubmit,
-  ICityData,
-  IDistrictData,
   InputChange,
   IProvinceData,
 } from "./../../../utils/Interface";
@@ -23,8 +21,7 @@ import Loader from "./../../../components/general/Loader";
 
 const Organization = () => {
   const [provinceData, setProvinceData] = useState<IProvinceData[]>([]);
-  const [cityData, setCityData] = useState<ICityData[]>([]);
-  const [districtData, setDistrictData] = useState<IDistrictData[]>([]);
+  const [cityData, setCityData] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [organizationData, setOrganizationData] = useState({
     name: "",
@@ -49,7 +46,8 @@ const Organization = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { alert, auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
+  const alert = useSelector((state: RootState) => state.alert);
 
   const handleChangeInput = (e: InputChange) => {
     const { name, value } = e.target;
@@ -180,9 +178,17 @@ const Organization = () => {
 
   useEffect(() => {
     const getProvinceData = () => {
-      fetch("https://dev.farizdotid.com/api/daerahindonesia/provinsi")
+      fetch("https://countriesnow.space/api/v0.1/countries/states", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country: "Pakistan",
+        }),
+      })
         .then((res) => res.json())
-        .then((res) => setProvinceData(res.provinsi));
+        .then((res) => setProvinceData(res.data.states));
     };
 
     getProvinceData();
@@ -190,31 +196,24 @@ const Organization = () => {
 
   useEffect(() => {
     const getCityData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${organizationData.province}`
-      )
+      fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country: "Pakistan",
+          state: organizationData.province,
+        }),
+      })
         .then((res) => res.json())
-        .then((res) => setCityData(res.kota_kabupaten));
+        .then((res) => setCityData(res.data));
     };
 
     if (organizationData.province) getCityData();
 
     return () => setCityData([]);
   }, [organizationData.province]);
-
-  useEffect(() => {
-    const getDistrictData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${organizationData.city}`
-      )
-        .then((res) => res.json())
-        .then((res) => setDistrictData(res.kecamatan));
-    };
-
-    if (organizationData.city) getDistrictData();
-
-    return () => setDistrictData([]);
-  }, [organizationData.city]);
 
   useEffect(() => {
     if (auth.accessToken) {
@@ -387,8 +386,8 @@ const Organization = () => {
                 >
                   <option value="">- Select Province -</option>
                   {provinceData.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nama}
+                    <option key={item.state_code} value={item.name}>
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -405,9 +404,9 @@ const Organization = () => {
                   className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
                 >
                   <option value="">- Select City -</option>
-                  {cityData.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nama}
+                  {cityData.map((item, index) => (
+                    <option key={index} value={item}>
+                      {item}
                     </option>
                   ))}
                 </select>
@@ -418,20 +417,14 @@ const Organization = () => {
                 <label htmlFor="district" className="text-sm">
                   District
                 </label>
-                <select
+                <input
+                  type="text"
                   name="district"
-                  id="district"
                   value={organizationData.district}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
-                >
-                  <option value="">- Select District -</option>
-                  {districtData.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nama}
-                    </option>
-                  ))}
-                </select>
+                  id="district"
+                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                />
               </div>
               <div className="flex-1">
                 <label htmlFor="postalCode" className="text-sm">

@@ -25,7 +25,8 @@ const Login = () => {
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("r");
   const dispatch = useDispatch<AppDispatch>();
-  const { alert, auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
+  const alert = useSelector((state: RootState) => state.alert);
 
   const handleChange = (e: InputChange) => {
     const { name, value } = e.target;

@@ -23,7 +23,7 @@ const JobDetail = ({ job }: IProps) => {
   const [isApplied, setIsApplied] = useState(false);
 
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const applyJob = async () => {
     if (!auth.accessToken) {
@@ -76,39 +76,15 @@ const JobDetail = ({ job }: IProps) => {
   }, [auth, job._id]);
 
   useEffect(() => {
-    const getProvinceData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/provinsi/${job?.organization?.user.province}`
-      )
-        .then((res) => res.json())
-        .then((res) => setProvince(res.nama));
-    };
-
-    getProvinceData();
+    setProvince(job?.organization?.user.province || "");
   }, [job?.organization?.user.province]);
 
   useEffect(() => {
-    const getCityData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kota/${job?.organization?.user.city}`
-      )
-        .then((res) => res.json())
-        .then((res) => setCity(res.nama));
-    };
-
-    getCityData();
+    setCity(job?.organization?.user.city || "");
   }, [job?.organization?.user.city]);
 
   useEffect(() => {
-    const getDistrictData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kecamatan/${job?.organization?.user.district}`
-      )
-        .then((res) => res.json())
-        .then((res) => setDistrict(res.nama));
-    };
-
-    getDistrictData();
+    setDistrict(job?.organization?.user.district || "");
   }, [job?.organization?.user.district]);
 
   return (

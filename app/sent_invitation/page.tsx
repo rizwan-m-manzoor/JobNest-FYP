@@ -17,7 +17,7 @@ const SentInvitation = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const fetchInvitation = async () => {

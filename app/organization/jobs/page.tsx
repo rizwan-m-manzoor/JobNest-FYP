@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,10 @@ const OrganizationJobs = () => {
 
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { alert, auth, job } = useSelector((state: RootState) => state);
+
+  const auth = useSelector((state: RootState) => state.auth);
+  const alert = useSelector((state: RootState) => state.alert);
+  const job = useSelector((state: RootState) => state.job);
 
   const handleClickApplicant = (item: IJob) => {
     setOpenApplicantModal(true);

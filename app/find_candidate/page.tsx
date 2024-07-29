@@ -14,7 +14,7 @@ const FindCandidate = () => {
   const [keyword, setKeyword] = useState("");
 
   const router = useRouter();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = (e: FormSubmit) => {
     e.preventDefault();

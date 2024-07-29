@@ -8,8 +8,6 @@ import { getDataAPI } from "./../../utils/fetchData";
 import { editProfile } from "./../../redux/slices/authSlice";
 import {
   FormSubmit,
-  ICityData,
-  IDistrictData,
   IJobseeker,
   InputChange,
   IProvinceData,
@@ -40,14 +38,14 @@ const EditProfile = () => {
   const [tempCv, setTempCv] = useState<File[]>([]);
 
   const [provinceData, setProvinceData] = useState<IProvinceData[]>([]);
-  const [districtData, setDistrictData] = useState<IDistrictData[]>([]);
-  const [cityData, setCityData] = useState<ICityData[]>([]);
+  const [cityData, setCityData] = useState<string[]>([]);
 
   const [openCVModal, setOpenCVModal] = useState(false);
 
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { auth, alert } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
+  const alert = useSelector((state: RootState) => state.alert);
 
   const handleChangeSkills = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "," && (e.target as HTMLInputElement).value !== ",") {
@@ -163,9 +161,17 @@ const EditProfile = () => {
 
   useEffect(() => {
     const getProvinceData = () => {
-      fetch("https://dev.farizdotid.com/api/daerahindonesia/provinsi")
+      fetch("https://countriesnow.space/api/v0.1/countries/states", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country: "Pakistan",
+        }),
+      })
         .then((res) => res.json())
-        .then((res) => setProvinceData(res.provinsi));
+        .then((res) => setProvinceData(res.data.states));
     };
 
     getProvinceData();
@@ -173,11 +179,18 @@ const EditProfile = () => {
 
   useEffect(() => {
     const getCityData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${userData.province}`
-      )
+      fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country: "Pakistan",
+          state: userData.province,
+        }),
+      })
         .then((res) => res.json())
-        .then((res) => setCityData(res.kota_kabupaten));
+        .then((res) => setCityData(res.data));
     };
 
     if (userData.province) getCityData();
@@ -185,24 +198,10 @@ const EditProfile = () => {
     return () => setCityData([]);
   }, [userData.province]);
 
-  useEffect(() => {
-    const getDistrictData = () => {
-      fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${userData.city}`
-      )
-        .then((res) => res.json())
-        .then((res) => setDistrictData(res.kecamatan));
-    };
-
-    if (userData.city) getDistrictData();
-
-    return () => setDistrictData([]);
-  }, [userData.city]);
-
   return (
     <>
       <Head>
-        <title>Job Seek | My Profile</title>
+        <title>Job Nest | My Profile</title>
       </Head>
       <Navbar />
       <div className="md:py-14 py-7 md:px-16 px-8 bg-gray-100">
@@ -314,8 +313,8 @@ const EditProfile = () => {
                 >
                   <option value="">- Select Province -</option>
                   {provinceData.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nama}
+                    <option key={item.state_code} value={item.name}>
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -332,9 +331,9 @@ const EditProfile = () => {
                   className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 >
                   <option value="">- Select City -</option>
-                  {cityData.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.nama}
+                  {cityData.map((item, index) => (
+                    <option key={index} value={item}>
+                      {item}
                     </option>
                   ))}
                 </select>
@@ -345,20 +344,14 @@ const EditProfile = () => {
                 <label htmlFor="district" className="text-sm">
                   District
                 </label>
-                <select
+                <input
+                  type="text"
                   name="district"
-                  id="district"
                   value={userData.district}
                   onChange={handleChange}
+                  id="district"
                   className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
-                >
-                  <option value="">- Select District -</option>
-                  {districtData.map((item) => (
-                    <option value={item.id} key={item.id}>
-                      {item.nama}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
               <div className="flex-1">
                 <label htmlFor="postalCode" className="text-sm">

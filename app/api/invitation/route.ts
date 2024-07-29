@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
     const isAuthorize = await authorizeRoles(
       user._id,
       "organization",
-      "jobseeker"
+      "jobseeker",
     );
     if (!isAuthorize) {
       return new NextResponse(JSON.stringify({ msg: "Forbidden" }), {

@@ -25,9 +25,10 @@ const OrganizationApproval = () => {
 
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { alert, auth, organization } = useSelector(
-    (state: RootState) => state
-  );
+
+  const auth = useSelector((state: RootState) => state.auth);
+  const alert = useSelector((state: RootState) => state.alert);
+  const organization = useSelector((state: RootState) => state.organization);
 
   const handleClickDetail = (organization: IOrganization) => {
     setOpenOrganizationDetailModal(true);

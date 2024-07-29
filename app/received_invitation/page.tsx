@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,8 @@ import OrganizationCard from "./../../components/general/OrganizationCard";
 const ReceivedInvitation = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { auth, invitation } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
+  const invitation = useSelector((state: RootState) => state.invitation);
 
   useEffect(() => {
     if (!auth.accessToken) {

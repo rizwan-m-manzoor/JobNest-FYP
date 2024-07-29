@@ -20,7 +20,9 @@ const Category = () => {
 
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { alert, auth, category } = useSelector((state: RootState) => state);
+  const alert = useSelector((state: RootState) => state.alert);
+  const auth = useSelector((state: RootState) => state.auth);
+  const category = useSelector((state: RootState) => state.category);
 
   const handleClickDelete = (item: ICategory) => {
     setSelectedItem(item);

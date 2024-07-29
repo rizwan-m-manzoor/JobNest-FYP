@@ -21,7 +21,7 @@ const CandidatesClient = ({ data, searchParams }: IProps) => {
 
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = (e: FormSubmit) => {
     e.preventDefault();

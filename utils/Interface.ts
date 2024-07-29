@@ -33,9 +33,9 @@ export interface IUser extends IUserLogin {
   avatar: string
   type: string
   role: string
-  province: number
-  city: number
-  district: number
+  province: string
+  city: string
+  district: string
   postalCode: number
   _doc?: object
   createdAt?: string
@@ -72,13 +72,13 @@ export interface IRegister extends IUserLogin {
 }
 
 export interface IProvinceData {
-  id: number
-  nama: string
+  name: string
+  state_code: string
 }
 
-export interface ICityData extends IProvinceData {
-  id_provinsi: string
-}
+// export interface ICityData extends IProvinceData {
+//   id_provinsi: string
+// }
 
 export interface IDistrictData extends IProvinceData {
   id_kota: string

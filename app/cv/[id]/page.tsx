@@ -17,7 +17,7 @@ const JobseekerCV = ({ params }: { params: { id: string } }) => {
 
   const jobseekerId = params.id;
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const fetchData = async () => {

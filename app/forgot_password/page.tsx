@@ -18,7 +18,7 @@ const ForgetPassword = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (auth.accessToken) {

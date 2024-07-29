@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from "./../../redux/store";
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { auth } = useSelector((state: RootState) => state);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
     router.push("/login");
