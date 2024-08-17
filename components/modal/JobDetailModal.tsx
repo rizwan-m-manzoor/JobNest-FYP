@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { IJob, IInvitation } from "./../../utils/Interface";
-import { toIDRCurrency } from "./../../utils/numberFormatter";
+import { toPKRCurrency } from "./../../utils/numberFormatter";
 
 interface IProps {
   openModal: boolean;
@@ -161,7 +161,7 @@ const InvitationDetailModal = ({
             <p className="mt-7 font-medium mb-4">Salary</p>
             <div className="flex items-center mb-7">
               <p className="font-semibold text-lg">
-                {toIDRCurrency(
+                {toPKRCurrency(
                   jobDetail
                     ? (jobDetail.salary as number)
                     : (invitationData?.job.salary as number)

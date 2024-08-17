@@ -24,7 +24,7 @@ const Organization = () => {
   const [cityData, setCityData] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [organizationData, setOrganizationData] = useState({
-    name: "",
+    username: "",
     email: "",
     phoneNumber: "",
     createdDate: "",
@@ -63,7 +63,7 @@ const Organization = () => {
   const handleSubmit = async (e: FormSubmit) => {
     e.preventDefault();
 
-    if (!organizationData.name) {
+    if (!organizationData.username) {
       return dispatch({
         type: "alert/alert",
         payload: { error: "Please provide name to register." },
@@ -235,14 +235,14 @@ const Organization = () => {
           <form onSubmit={handleSubmit}>
             <div className="flex md:flex-row flex-col md:items-center gap-7 md:mb-10 mb-7">
               <div className="flex-1">
-                <label htmlFor="name" className="text-sm">
+                <label htmlFor="username" className="text-sm">
                   Organization Name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={organizationData.name}
+                  id="username"
+                  name="username"
+                  value={organizationData.username}
                   onChange={handleChangeInput}
                   className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />

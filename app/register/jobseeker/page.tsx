@@ -17,7 +17,7 @@ import Loader from "./../../../components/general/Loader";
 
 const Jobseeker = () => {
   const [userData, setUserData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -39,10 +39,10 @@ const Jobseeker = () => {
   const handleSubmit = async (e: FormSubmit) => {
     e.preventDefault();
 
-    if (!userData.name) {
+    if (!userData.username) {
       return dispatch({
         type: "alert/alert",
-        payload: { error: "Please provide name to register." },
+        payload: { error: "Please provide username to register." },
       });
     }
 
@@ -111,8 +111,8 @@ const Jobseeker = () => {
               <AiOutlineUser className="text-lg text-gray-500" />
               <input
                 type="text"
-                name="name"
-                value={userData.name}
+                name="username"
+                value={userData.username}
                 onChange={handleChange}
                 placeholder="Name"
                 className="outline-0 w-full text-sm"

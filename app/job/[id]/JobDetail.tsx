@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IJob } from "../../../utils/Interface";
-import { toIDRCurrency } from "../../../utils/numberFormatter";
+import { toPKRCurrency } from "../../../utils/numberFormatter";
 import { getDataAPI, postDataAPI } from "../../../utils/fetchData";
 import { RootState } from "../../../redux/store";
 import Head from "next/head";
@@ -153,7 +153,7 @@ const JobDetail = ({ job }: IProps) => {
             <p className="font-medium mb-4">Salary</p>
             <div className="flex items-center mb-7">
               <p className="font-semibold text-lg">
-                {toIDRCurrency(job?.salary!)}
+                {toPKRCurrency(job?.salary!)}
               </p>
               <p className="text-gray-500 text-xs">/month</p>
             </div>

@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   try {
     await connectDB();
 
-    const token = req.cookies.get("jobseek_rfToken")?.value;
+    const token = req.cookies.get("jobnest_rfToken")?.value;
     if (!token) {
       return new NextResponse(
         JSON.stringify({

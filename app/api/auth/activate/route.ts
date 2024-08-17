@@ -32,9 +32,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // const decoded = <IRegister>(
-    //   jwt.verify(token, `${process.env.ACTIVATION_TOKEN_SECRET}`)
-    // );
     if (!decoded) {
       return new NextResponse(
         JSON.stringify({ msg: "Invalid account activation token." }),

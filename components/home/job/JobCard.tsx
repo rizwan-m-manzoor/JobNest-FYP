@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { toIDRCurrency } from "./../../../utils/numberFormatter";
+import { toPKRCurrency } from "./../../../utils/numberFormatter";
 
 interface IProps {
   id: string;
@@ -73,14 +73,14 @@ const JobCard = ({
             ? "Freelance"
             : "Contractual"}
         </p>
-        <div
+        {/* <div
           className="mt-3 text-gray-400 text-sm"
           dangerouslySetInnerHTML={{ __html: description.slice(0, 30) + "..." }}
-        />
+        /> */}
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <p className="font-semibold text-xl">{toIDRCurrency(salary)}</p>
+          <p className="font-semibold text-xl">{toPKRCurrency(salary)}</p>
           <sub className="text-xs text-gray-500 font-medium">/{salaryType}</sub>
         </div>
       </div>

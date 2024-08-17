@@ -16,7 +16,7 @@ import Navbar from "./../../components/general/Navbar";
 
 const Login = () => {
   const [userData, setUserData] = useState({
-    email: "",
+    identifier: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -36,14 +36,14 @@ const Login = () => {
   const handleSubmit = async (e: FormSubmit) => {
     e.preventDefault();
 
-    if (!userData.email) {
+    if (!userData.identifier) {
       return dispatch({
         type: "alert/alert",
         payload: { error: "Please provide email to login." },
       });
     }
 
-    if (!validateEmail(userData.email)) {
+    if (!validateEmail(userData.identifier)) {
       return dispatch({
         type: "alert/alert",
         payload: { error: "Please provide valid email address." },
@@ -58,18 +58,27 @@ const Login = () => {
     }
 
     await dispatch(login(userData));
-    setUserData({ email: "", password: "" });
+    setUserData({ identifier: "", password: "" });
   };
 
   useEffect(() => {
     if (auth.accessToken) {
-      if (redirectPath) {
+      if (redirectPath && redirectPath !== "email-confirmed") {
         router.push(`/${redirectPath}`);
       } else {
         router.push("/");
       }
     }
   }, [auth, router, redirectPath]);
+
+  useEffect(() => {
+    if (redirectPath === "email-confirmed") {
+      dispatch({
+        type: "alert/alert",
+        payload: { success: "Your Email has been confirmed." },
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -84,14 +93,14 @@ const Login = () => {
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-7">
-              <label htmlFor="email" className="text-sm">
+              <label htmlFor="identifier" className="text-sm">
                 Email
               </label>
               <input
                 type="text"
-                id="email"
-                name="email"
-                value={userData.email}
+                id="identifier"
+                name="identifier"
+                value={userData.identifier}
                 onChange={handleChange}
                 placeholder="me@example.com"
                 className="w-full outline-0 border border-gray-300 px-2 py-3 text-sm rounded-md mt-3"
