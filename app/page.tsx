@@ -21,8 +21,8 @@ interface IProps {
 }
 
 export default async function Home() {
-  const res = await axios.get(`${process.env.CLIENT_URL}/api/home`);
-  const { latestJob: latestJobs, categoryDisplay: categories } = res.data;
+  // const res = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/auth/local`);
+  // const { latestJob: latestJobs, categoryDisplay: categories } = res.data;
 
   return (
     <>
@@ -32,8 +32,8 @@ export default async function Home() {
       <Navbar />
       <div>
         <Jumbotron />
-        <CategoryContainer categories={categories} />
-        <JobContainer jobs={latestJobs} />
+        {/* <CategoryContainer categories={categories} />
+        <JobContainer jobs={latestJobs} /> */}
         <ReviewContainer />
       </div>
       <Footer />

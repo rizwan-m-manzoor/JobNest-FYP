@@ -18,9 +18,9 @@ const Navbar = () => {
     <div className="flex items-center justify-end gap-6 py-7 px-14">
       <div className="flex items-center gap-5">
         <div className="w-8 h-8 rounded-full outline-2 outline-offset-2 outline-gray-700 outline shrink-0">
-          <img src={auth.user?.avatar} alt={auth.user?.name} />
+          <img src={auth.user?.avatar} alt={auth.user?.username} />
         </div>
-        <p className="text-sm">{auth.user?.name}</p>
+        <p className="text-sm">{auth.user?.username}</p>
       </div>
       <BsPower onClick={handleLogout} className="cursor-pointer text-xl" />
     </div>

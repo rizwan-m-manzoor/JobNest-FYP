@@ -27,7 +27,7 @@ const SentInvitation = () => {
       setLoading(false);
     };
 
-    if (auth.user?.role === "organization") {
+    if (auth.user?.role?.name === "organization") {
       fetchInvitation();
     }
   }, [auth]);
@@ -36,7 +36,7 @@ const SentInvitation = () => {
     if (!auth.accessToken) {
       router.push("/login?r=sent_invitation");
     } else {
-      if (auth.user?.role !== "organization") {
+      if (auth.user?.role?.name !== "organization") {
         router.push("/");
       }
     }

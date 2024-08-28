@@ -32,14 +32,14 @@ const CandidatesClient = ({ data, searchParams }: IProps) => {
     if (!auth.accessToken) {
       router.push("/login?r=candidates");
     } else {
-      if (auth.user?.role !== "organization" && auth.user?.role !== "admin") {
+      if (auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "admin") {
         router.push("/");
       }
     }
   }, [router, auth]);
 
   useEffect(() => {
-    if (auth.user?.role === "organization") {
+    if (auth.user?.role?.name === "organization") {
       dispatch(getJobPosition(`${auth.accessToken}`));
     }
   }, [dispatch, auth]);

@@ -70,7 +70,7 @@ const JobDetail = ({ job }: IProps) => {
       setIsApplied(res.data.isApplied);
     };
 
-    if (auth.accessToken && auth.user?.role === "jobseeker") {
+    if (auth.accessToken && auth.user?.role?.name === "jobseeker") {
       fetchAppliedStatus();
     }
   }, [auth, job._id]);
@@ -117,7 +117,7 @@ const JobDetail = ({ job }: IProps) => {
               </p>
             ) : (
               <>
-                {auth.user?.role === "jobseeker" && (
+                {auth.user?.role?.name === "jobseeker" && (
                   <button
                     onClick={applyJob}
                     className="bg-[#504ED7] hover:bg-[#2825C2] outline-0 transition-[background] text-white rounded-md text-sm px-4 py-2"

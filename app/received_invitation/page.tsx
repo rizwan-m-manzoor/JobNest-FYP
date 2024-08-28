@@ -20,7 +20,7 @@ const ReceivedInvitation = () => {
     if (!auth.accessToken) {
       router.push("/login?r=received_invitation");
     } else {
-      if (auth.user?.role !== "jobseeker") {
+      if (auth.user?.role?.name !== "jobseeker") {
         router.push("/");
       } else {
         dispatch(getReceivedInvitations(`${auth.accessToken}`));

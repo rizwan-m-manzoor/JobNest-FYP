@@ -26,7 +26,6 @@ export const register = async (
     const res = await postDataAPI(
       "auth/local/register",
       data,
-      process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
     );
     dispatch({
       type: "alert/alert",
@@ -38,7 +37,7 @@ export const register = async (
     dispatch({
       type: "alert/alert",
       payload: {
-        error: err.response.data.error.name,
+        error: err.response.data.error.message,
       },
     });
   }

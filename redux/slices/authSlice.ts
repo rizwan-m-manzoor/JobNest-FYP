@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IEditProfile, IUserLogin, IAuth } from "./../../utils/Interface";
-import { getDataAPI, patchDataAPI, postDataAPI } from "./../../utils/fetchData";
+import {
+  getDataAPI,
+  patchDataAPI,
+  postDataAPI,
+  putDataAPI,
+} from "./../../utils/fetchData";
 import { uploadFile } from "./../../utils/uploadHelper";
 import Cookie from "js-cookie";
 
@@ -16,28 +21,29 @@ export const login = createAsyncThunk(
     try {
       thunkAPI.dispatch({ type: "alert/alert", payload: { loading: true } });
 
-      const res = await postDataAPI(
-        "auth/local",
-        userData,
-        process.env.NEXT_PUBLIC_STRAPI_API_TOKEN
-      );
-      // localStorage.setItem("jobnest_logged", "true");
+      const res = await postDataAPI("auth/local", userData);
+      localStorage.setItem("jobnest_logged", "true");
 
-      // Cookie.set('jobnest_rfToken', res.data.refreshToken, {
-      //   expires: 30
-      // })
+      Cookie.set(
+        "jobnest_login_data",
+        JSON.stringify({
+          accessToken: res.data.jwt,
+          user: res.data.user,
+        }),
+        {
+          expires: 30,
+        }
+      );
 
       thunkAPI.dispatch({
         type: "alert/alert",
         payload: { success: `Authorized as ${res.data.user.username}` },
       });
 
-      console.log(res.data, "here at testing response");
-
-      // return {
-      //   accessToken: res.data.jwt,
-      //   user: res.data.user
-      // }
+      return {
+        accessToken: res.data.jwt,
+        user: res.data.user,
+      };
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
@@ -47,20 +53,25 @@ export const login = createAsyncThunk(
   }
 );
 
-export const refreshToken = createAsyncThunk(
-  "auth/refreshToken",
+export const getLoginData = createAsyncThunk(
+  "auth/getLoginData",
   async (_, thunkAPI) => {
-    const logged = localStorage.getItem("jobnest_logged");
-    if (logged !== "true") return;
-
     try {
-      const res = await getDataAPI("auth/refresh_token");
-      return res.data;
+      const logged = localStorage.getItem("jobnest_logged");
+      if (logged !== "true") return {};
+
+      const cookieData = Cookie.get("jobnest_login_data");
+      const loginData = cookieData ? JSON.parse(cookieData) : {};
+
+      return loginData;
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
-        payload: { error: err.response.data.msg },
+        payload: {
+          error: err.message || "Something went wrong, please login again.",
+        },
       });
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
@@ -68,7 +79,7 @@ export const refreshToken = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   localStorage.removeItem("jobnest_logged");
 
-  Cookie.remove("jobnest_rfToken");
+  Cookie.remove("jobnest_login_data");
 
   thunkAPI.dispatch({
     type: "alert/alert",
@@ -97,8 +108,8 @@ export const editProfile = createAsyncThunk(
         cvUrl = url[0];
       }
 
-      const res = await patchDataAPI(
-        "jobseeker",
+      const res = await putDataAPI(
+        `users/${profileData.userId}`,
         {
           ...profileData,
           avatar: avatarUrl ? avatarUrl : profileData.avatar,
@@ -109,12 +120,24 @@ export const editProfile = createAsyncThunk(
 
       thunkAPI.dispatch({
         type: "alert/alert",
-        payload: { success: res.data.msg },
+        payload: { success: "Profile updated." },
+      });
+
+      // Retrieve the current cookie
+      const existingCookie = Cookie.get("jobnest_login_data");
+      const loginData = existingCookie ? JSON.parse(existingCookie) : {};
+
+      // Update the user information while keeping the JWT token the same
+      loginData.user = res.data;
+
+      // Set the updated cookie
+      Cookie.set("jobnest_login_data", JSON.stringify(loginData), {
+        expires: 30,
       });
 
       return {
-        accessToken: profileData.token,
-        user: res.data.user,
+        accessToken: loginData.accessToken,
+        user: res.data,
       };
     } catch (err: any) {
       thunkAPI.dispatch({

@@ -25,7 +25,7 @@ const FindCandidate = () => {
     if (!auth.accessToken) {
       router.push("/login?r=find_candidate");
     } else {
-      if (auth.user?.role !== "organization" && auth.user?.role !== "admin") {
+      if (auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "admin") {
         router.push("/");
       }
     }

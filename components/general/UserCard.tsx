@@ -38,7 +38,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
     <>
       <div
         className={`bg-white rounded-md border border-gray-200 shadow-md p-5 cursor-pointer hover:scale-105 transition-[transform] ${
-          auth.user?.role !== "organization" && auth.user?.role !== "admin"
+          auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "admin"
             ? "blur-lg"
             : undefined
         }`}
@@ -90,8 +90,8 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
         </div>
         <p className="mt-6 text-sm text-gray-700">Based at: {province}</p>
         <div className="mt-3 flex items-center justify-between">
-          {(auth.user?.role === "organization" ||
-            auth.user?.role === "admin") && (
+          {(auth.user?.role?.name === "organization" ||
+            auth.user?.role?.name === "admin") && (
             <button
               onClick={() =>
                 dispatch({
@@ -152,7 +152,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
             </>
           ) : (
             <>
-              {auth.user?.role === "organization" && (
+              {auth.user?.role?.name === "organization" && (
                 <button
                   onClick={() => setOpenHireModal(true)}
                   className="bg-green-600 hover:bg-green-700 transition-[background] text-white rounded-md px-4 py-2 text-sm"

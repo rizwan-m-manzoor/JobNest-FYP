@@ -21,7 +21,7 @@ import Loader from "./../../components/general/Loader";
 
 const EditProfile = () => {
   const [userData, setUserData] = useState({
-    name: "",
+    username: "",
     email: "",
     dob: "",
     cv: "",
@@ -85,10 +85,10 @@ const EditProfile = () => {
   const handleSubmit = (e: FormSubmit) => {
     e.preventDefault();
 
-    if (!userData.name) {
+    if (!userData.username) {
       return dispatch({
         type: "alert/alert",
-        payload: { error: "Please provide name." },
+        payload: { error: "Please provide username." },
       });
     }
 
@@ -106,6 +106,7 @@ const EditProfile = () => {
         tempAvatar,
         tempCv,
         token: `${auth.accessToken}`,
+        userId: auth.user?.id || "",
       })
     );
   };
@@ -114,7 +115,7 @@ const EditProfile = () => {
     if (!auth.accessToken) {
       router.push("/login?r=edit_profile");
     } else {
-      if (auth.user?.role !== "jobseeker") {
+      if (auth.user?.role?.name !== "jobseeker") {
         router.push("/");
       }
     }
@@ -124,10 +125,16 @@ const EditProfile = () => {
     const fetchJobseeker = async () => {
       try {
         const res = await getDataAPI(
-          `jobseeker/${auth.user?._id}`,
+          `job-seekers/${auth.user?.job_seeker?.id}?populate=skills`,
           `${auth.accessToken}`
         );
-        setJobseeker(res.data.jobseeker);
+        const { skills, ...remainingData } = res.data?.data?.attributes;
+        setJobseeker({
+          skills: skills.data?.map(
+            (item: any) => item.attributes.jobSeekerSkill
+          ),
+          ...remainingData,
+        } as Partial<IJobseeker>);
       } catch (err: any) {
         dispatch({
           type: "alert/alert",
@@ -144,12 +151,12 @@ const EditProfile = () => {
   useEffect(() => {
     if (auth.accessToken) {
       setUserData({
-        name: auth.user?.name ?? "",
+        username: auth.user?.username ?? "",
         email: auth.user?.email ?? "",
-        province: `${auth.user?.province}`,
-        avatar: `${auth.user?.avatar}`,
-        city: `${auth.user?.city}`,
-        district: `${auth.user?.district}`,
+        province: auth.user?.province ?? "",
+        avatar: auth.user?.avatar ?? "",
+        city: auth.user?.city ?? "",
+        district: auth.user?.district ?? "",
         cv: jobseeker.cv || "",
         postalCode: auth.user?.postalCode || 0,
         dob: jobseeker.dob ? jobseeker.dob.slice(0, 10) : "",
@@ -222,7 +229,7 @@ const EditProfile = () => {
                         ? URL.createObjectURL(tempAvatar[0])
                         : userData.avatar
                     }
-                    alt={auth.user?.name}
+                    alt={auth.user?.username}
                     className="w-full h-full rounded-full"
                   />
                 </div>
@@ -241,9 +248,9 @@ const EditProfile = () => {
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={userData.name}
+                id="username"
+                name="username"
+                value={userData.username}
                 onChange={handleChange}
                 className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
               />
@@ -331,7 +338,7 @@ const EditProfile = () => {
                   className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 >
                   <option value="">- Select City -</option>
-                  {cityData.map((item, index) => (
+                  {cityData?.map((item, index) => (
                     <option key={index} value={item}>
                       {item}
                     </option>

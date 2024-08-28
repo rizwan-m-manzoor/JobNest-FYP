@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { RootState } from "./../../redux/store";

@@ -7,18 +7,17 @@ export type InputChange = ChangeEvent<
 export type FormSubmit = FormEvent<HTMLFormElement>;
 
 export interface IJobseeker {
-  _id: string;
+  id: string;
   cv?: string;
   dob?: string;
-  user: IUser;
-  status: string;
-  skills: string[];
-  about: string;
+  status?: string;
+  skills?: string[];
+  about?: string;
 }
 
 export interface IEditProfile {
   avatar: string;
-  name: string;
+  username: string;
   dob: string;
   cv: string;
   province: string;
@@ -27,22 +26,32 @@ export interface IEditProfile {
   postalCode: number;
   skills: string[];
   about: string;
+  userId: string;
 }
 
 export interface IUser {
-  _id: string;
+  id: string;
   username: string;
   password: string;
-  name: string;
+  email: string;
   avatar: string;
   type: string;
-  role: string;
+  role: Role;
   province: string;
   city: string;
   district: string;
   postalCode: number;
-  _doc?: object;
   createdAt?: string;
+  job_seeker?: IJobseeker;
+  organization?: IOrganization;
+}
+export interface Role {
+  id: number;
+  name: string;
+  type: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IUserLogin {
@@ -92,7 +101,7 @@ export interface IDistrictData extends IProvinceData {
 }
 
 export interface IJob {
-  _id?: string;
+  id?: string;
   organization?: IOrganization;
   position: string;
   employmentType: string;
@@ -112,14 +121,14 @@ export interface IJobState {
 }
 
 export interface IInvitation {
-  _id?: string;
+  id?: string;
   job: IJob;
   user: IUser;
   status?: string;
 }
 
 export interface ICategory {
-  _id?: string;
+  id?: string;
   name: string;
   image: string | File[];
 }
@@ -130,8 +139,7 @@ export interface ICategoryState {
 }
 
 export interface IOrganization {
-  _id: string;
-  user: IUser;
+  id: string;
   phoneNumber: string;
   createdDate: string;
   totalEmployee: number;
@@ -148,7 +156,7 @@ export interface IOrganizationState {
 }
 
 export interface IApplicant {
-  _id: string;
+  id: string;
   status: string;
   job: string;
   jobseeker: IJobseeker;

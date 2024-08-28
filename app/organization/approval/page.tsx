@@ -51,7 +51,7 @@ const OrganizationApproval = () => {
     if (!auth.accessToken) {
       router.push("/login?r=organization/approval");
     } else {
-      if (auth.user?.role !== "admin") {
+      if (auth.user?.role?.name !== "admin") {
         router.push("/");
       }
     }

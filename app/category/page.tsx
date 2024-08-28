@@ -53,7 +53,7 @@ const Category = () => {
     if (!auth.accessToken) {
       router.push("/login?r=category");
     } else {
-      if (auth.user?.role !== "admin") {
+      if (auth.user?.role?.name !== "admin") {
         router.push("/");
       }
     }

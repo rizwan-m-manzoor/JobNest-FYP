@@ -82,8 +82,8 @@ const Navbar = () => {
           >
             Find Jobs
           </Link>
-          {(auth.user?.role === "organization" ||
-            auth.user?.role === "admin") && (
+          {(auth.user?.role?.name === "organization" ||
+            auth.user?.role?.name === "admin") && (
             <Link
               href="/find_candidate"
               className={`navbar-link ${
@@ -120,7 +120,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              {auth.user?.role === "jobseeker" ? (
+              {auth.user?.role?.name === "jobseeker" ? (
                 <>
                   <Link
                     href="/edit_profile"
@@ -147,7 +147,7 @@ const Navbar = () => {
                     Jobs Applied
                   </Link>
                 </>
-              ) : auth.user?.role === "organization" ? (
+              ) : auth.user?.role?.name === "organization" ? (
                 <>
                   <Link
                     href="/organization/jobs"
@@ -175,7 +175,7 @@ const Navbar = () => {
                 <p className="navbar-link cursor-pointer">Logout</p>
               </div>
               <div>
-                <p>Hi, {auth.user?.name}</p>
+                <p>Hi, {auth.user?.username}</p>
               </div>
             </>
           )}

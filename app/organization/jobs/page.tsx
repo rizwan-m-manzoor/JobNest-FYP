@@ -67,7 +67,7 @@ const OrganizationJobs = () => {
     if (!auth.accessToken) {
       router.push("/login?r=organization/jobs");
     } else {
-      if (auth.user?.role !== "organization") {
+      if (auth.user?.role?.name !== "organization") {
         router.push("/");
       }
     }
