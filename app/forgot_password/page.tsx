@@ -49,14 +49,15 @@ const ForgetPassword = () => {
       dispatch({
         type: "alert/alert",
         payload: {
-          success: res.data.msg,
+          success:
+            "You will receive Reset Password Link, if your email has a verified account.",
         },
       });
     } catch (err: any) {
       dispatch({
         type: "alert/alert",
         payload: {
-          error: err.response.data.msg,
+          error: err.response.data.error.message,
         },
       });
     }

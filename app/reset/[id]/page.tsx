@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { FormSubmit, InputChange } from "./../../../utils/Interface";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { patchDataAPI } from "./../../../utils/fetchData";
+import { postDataAPI } from "./../../../utils/fetchData";
 import { RootState } from "./../../../redux/store";
 import Head from "next/head";
 import Footer from "./../../../components/general/Footer";
@@ -63,14 +63,15 @@ const ResetPassword = ({ params }: { params: { id: string } }) => {
 
     setLoading(true);
     try {
-      const res = await patchDataAPI("auth/reset-password", {
-        token: params.id,
+      const res = await postDataAPI("auth/reset-password", {
+        code: params.id,
         password: passwordData.password,
+        passwordConfirmation: passwordData.password,
       });
       dispatch({
         type: "alert/alert",
         payload: {
-          success: res.data.msg,
+          success: 'Your password has been updated.',
         },
       });
 
@@ -79,7 +80,7 @@ const ResetPassword = ({ params }: { params: { id: string } }) => {
       dispatch({
         type: "alert/alert",
         payload: {
-          error: err.response.data.msg,
+          error: err.response.data.error.message,
         },
       });
     }
