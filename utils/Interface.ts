@@ -148,6 +148,7 @@ export interface IOrganization {
   description: string;
   status: string;
   createdAt: string;
+  user?: IUser;
 }
 
 export interface IOrganizationState {

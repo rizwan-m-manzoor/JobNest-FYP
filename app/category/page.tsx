@@ -24,6 +24,10 @@ const Category = () => {
   const auth = useSelector((state: RootState) => state.auth);
   const category = useSelector((state: RootState) => state.category);
 
+  useEffect(() => {
+    console.log(category, "here at category");
+  });
+
   const handleClickDelete = (item: ICategory) => {
     setSelectedItem(item);
     setOpenDeleteModal(true);
@@ -42,7 +46,7 @@ const Category = () => {
   const handleDeleteCategory = () => {
     dispatch(
       deleteCategory({
-        id: `${selectedItem._id}`,
+        id: `${selectedItem.id}`,
         token: `${auth.accessToken}`,
       })
     );
@@ -53,7 +57,7 @@ const Category = () => {
     if (!auth.accessToken) {
       router.push("/login?r=category");
     } else {
-      if (auth.user?.role?.name !== "admin") {
+      if (auth.user?.role?.name !== "Authenticated") {
         router.push("/");
       }
     }
@@ -82,7 +86,7 @@ const Category = () => {
             <Loader size="xl" />
           ) : (
             <>
-              {category.data.length === 0 ? (
+              {category.data?.length === 0 ? (
                 <div className="bg-red-500 text-white text-center py-3 rounded-md">
                   There's no category data found.
                 </div>
@@ -98,9 +102,9 @@ const Category = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {category.data.map((item, idx) => (
+                        {category.data?.map((item, idx) => (
                           <tr
-                            key={item._id}
+                            key={item.id}
                             className="text-center bg-[#F9F9FF] text-sm"
                           >
                             <td className="p-3">{idx + 1}</td>

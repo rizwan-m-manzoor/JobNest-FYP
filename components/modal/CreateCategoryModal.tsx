@@ -46,7 +46,7 @@ const CreateCategoryModal = ({
         updateCategory({
           name: category,
           image,
-          _id: selectedItem._id,
+          id: selectedItem.id,
           prevImg: urlImage,
           token: `${auth.accessToken}`,
         })

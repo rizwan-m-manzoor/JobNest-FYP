@@ -38,7 +38,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
     <>
       <div
         className={`bg-white rounded-md border border-gray-200 shadow-md p-5 cursor-pointer hover:scale-105 transition-[transform] ${
-          auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "admin"
+          auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "Authenticated"
             ? "blur-lg"
             : undefined
         }`}
@@ -91,7 +91,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
         <p className="mt-6 text-sm text-gray-700">Based at: {province}</p>
         <div className="mt-3 flex items-center justify-between">
           {(auth.user?.role?.name === "organization" ||
-            auth.user?.role?.name === "admin") && (
+            auth.user?.role?.name === "Authenticated") && (
             <button
               onClick={() =>
                 dispatch({

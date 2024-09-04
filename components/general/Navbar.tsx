@@ -83,7 +83,7 @@ const Navbar = () => {
             Find Jobs
           </Link>
           {(auth.user?.role?.name === "organization" ||
-            auth.user?.role?.name === "admin") && (
+            auth.user?.role?.name === "Authenticated") && (
             <Link
               href="/find_candidate"
               className={`navbar-link ${

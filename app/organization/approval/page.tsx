@@ -51,7 +51,7 @@ const OrganizationApproval = () => {
     if (!auth.accessToken) {
       router.push("/login?r=organization/approval");
     } else {
-      if (auth.user?.role?.name !== "admin") {
+      if (auth.user?.role?.name !== "Authenticated") {
         router.push("/");
       }
     }
@@ -86,12 +86,12 @@ const OrganizationApproval = () => {
                     <tbody>
                       {organization.data.map((item, idx) => (
                         <tr
-                          key={item._id}
+                          key={item.id}
                           className="text-center bg-[#F9F9FF] text-sm"
                         >
                           <td className="p-3">{idx + 1}</td>
-                          <td>{item.user.name}</td>
-                          <td>{item.user.email}</td>
+                          <td>{item.user?.username}</td>
+                          <td>{item.user?.email}</td>
                           <td>{item.industryType}</td>
                           <td>
                             {new Date(item.createdDate).toLocaleDateString()}
@@ -107,7 +107,7 @@ const OrganizationApproval = () => {
                               Detail
                             </button>
                             <button
-                              onClick={() => handleAcceptOrg(item._id)}
+                              onClick={() => handleAcceptOrg(item.id)}
                               className="bg-green-600 mr-3 hover:bg-green-700 transition-[background] rounded-md text-white px-3 text-xs py-2"
                             >
                               Accept
@@ -116,7 +116,7 @@ const OrganizationApproval = () => {
                               onClick={() =>
                                 dispatch(
                                   rejectOrganization({
-                                    id: item._id,
+                                    id: item.id,
                                     token: `${auth.accessToken}`,
                                   })
                                 )

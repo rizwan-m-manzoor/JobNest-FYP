@@ -42,7 +42,7 @@ const JobseekerCV = ({ params }: { params: { id: string } }) => {
     if (!auth.accessToken) {
       router.push(`/login?r=cv/${jobseekerId}`);
     } else {
-      if (auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "admin") {
+      if (auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "Authenticated") {
         router.push("/");
       }
     }
