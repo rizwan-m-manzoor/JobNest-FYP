@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { IJob, IInvitation } from "./../../utils/Interface";
 import { toPKRCurrency } from "./../../utils/numberFormatter";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface IProps {
   openModal: boolean;
@@ -17,6 +19,7 @@ const InvitationDetailModal = ({
   jobDetail,
 }: IProps) => {
   const modalRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const auth = useSelector((state: RootState) => state.auth);
 
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
@@ -41,26 +44,26 @@ const InvitationDetailModal = ({
   useEffect(() => {
     setProvince(
       jobDetail
-        ? jobDetail.organization?.user.province || ""
-        : invitationData?.job.organization?.user.province || ""
+        ? auth.user?.province || ""
+        : invitationData?.job.organization?.user?.province || ""
     );
-  }, [invitationData?.job.organization?.user.province, jobDetail]);
+  }, [invitationData?.job.organization?.user?.province, jobDetail]);
 
   useEffect(() => {
     setCity(
       jobDetail
-        ? jobDetail.organization?.user.city || ""
-        : invitationData?.job.organization?.user.city || ""
+        ? auth.user?.city || ""
+        : invitationData?.job.organization?.user?.city || ""
     );
-  }, [invitationData?.job.organization?.user.city, jobDetail]);
+  }, [invitationData?.job.organization?.user?.city, jobDetail]);
 
   useEffect(() => {
     setDistrict(
       jobDetail
-        ? jobDetail.organization?.user.district || ""
-        : invitationData?.job.organization?.user.district || ""
+        ? auth.user?.district || ""
+        : invitationData?.job.organization?.user?.district || ""
     );
-  }, [invitationData?.job.organization?.user.district, jobDetail]);
+  }, [invitationData?.job.organization?.user?.district, jobDetail]);
 
   return (
     <div
@@ -89,13 +92,13 @@ const InvitationDetailModal = ({
               <img
                 src={
                   jobDetail
-                    ? jobDetail?.organization?.user.avatar
-                    : invitationData?.job.organization?.user.avatar
+                    ? auth.user?.avatar
+                    : invitationData?.job.organization?.user?.avatar
                 }
                 alt={
                   jobDetail
-                    ? jobDetail?.organization?.user.avatar
-                    : invitationData?.job.organization?.user.name
+                    ? auth.user?.avatar
+                    : invitationData?.job.organization?.user?.username
                 }
                 className="w-full h-full rounded-full object-cover"
               />
@@ -106,8 +109,8 @@ const InvitationDetailModal = ({
               </h1>
               <p className="text-xs mt-2">
                 {jobDetail
-                  ? jobDetail.organization?.user.name
-                  : invitationData?.job.organization?.user.name}
+                  ? auth.user?.username
+                  : invitationData?.job.organization?.user?.username}
               </p>
             </div>
           </div>
@@ -175,7 +178,7 @@ const InvitationDetailModal = ({
               dangerouslySetInnerHTML={{
                 __html: `${
                   jobDetail
-                    ? jobDetail?.organization?.description
+                    ? auth.user?.organization?.description
                     : invitationData?.job.organization?.description
                 }`,
               }}
@@ -186,17 +189,17 @@ const InvitationDetailModal = ({
             </p>
             <p className="mb-7 text-sm">
               {jobDetail
-                ? jobDetail.organization?.address
+                ? auth.user?.organization?.address
                 : invitationData?.job.organization?.address}
               ,{" "}
               {jobDetail
-                ? jobDetail.organization?.user.postalCode
-                : invitationData?.job.organization?.user.postalCode}
+                ? auth.user?.postalCode
+                : invitationData?.job.organization?.user?.postalCode}
             </p>
             <p className="font-medium mb-4">Estimated Company Total Employee</p>
             <p>
               {jobDetail
-                ? jobDetail.organization?.totalEmployee
+                ? auth.user?.organization?.totalEmployee
                 : invitationData?.job.organization?.totalEmployee}{" "}
               people
             </p>

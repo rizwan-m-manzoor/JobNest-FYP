@@ -88,7 +88,7 @@ const HireModal = ({ openModal, setOpenModal, userName, id, job }: IProps) => {
             >
               <option value="">- Select Position -</option>
               {job.map((item) => (
-                <option key={item._id} value={item._id}>
+                <option key={item.id} value={item.id}>
                   {item.position}
                 </option>
               ))}

@@ -42,7 +42,7 @@ const JobDetail = ({ job }: IProps) => {
     try {
       const res = await postDataAPI(
         "job/apply",
-        { job: job?._id, userId: auth.user?._id },
+        { job: job?.id, userId: auth.user?.id },
         `${auth.accessToken}`
       );
       dispatch({
@@ -64,7 +64,7 @@ const JobDetail = ({ job }: IProps) => {
   useEffect(() => {
     const fetchAppliedStatus = async () => {
       const res = await getDataAPI(
-        `jobs-applied/status/${job._id}`,
+        `jobs-applied/status/${job.id}`,
         auth.accessToken
       );
       setIsApplied(res.data.isApplied);
@@ -73,25 +73,25 @@ const JobDetail = ({ job }: IProps) => {
     if (auth.accessToken && auth.user?.role?.name === "jobseeker") {
       fetchAppliedStatus();
     }
-  }, [auth, job._id]);
+  }, [auth, job.id]);
 
   useEffect(() => {
-    setProvince(job?.organization?.user.province || "");
-  }, [job?.organization?.user.province]);
+    setProvince(job?.organization?.user?.province || "");
+  }, [job?.organization?.user?.province]);
 
   useEffect(() => {
-    setCity(job?.organization?.user.city || "");
-  }, [job?.organization?.user.city]);
+    setCity(job?.organization?.user?.city || "");
+  }, [job?.organization?.user?.city]);
 
   useEffect(() => {
-    setDistrict(job?.organization?.user.district || "");
-  }, [job?.organization?.user.district]);
+    setDistrict(job?.organization?.user?.district || "");
+  }, [job?.organization?.user?.district]);
 
   return (
     <>
       <Head>
         <title>
-          Job Nest | {job.position} at {job.organization?.user.name}
+          Job Nest | {job.position} at {job.organization?.user?.username}
         </title>
       </Head>
       <Navbar />
@@ -101,14 +101,14 @@ const JobDetail = ({ job }: IProps) => {
             <div className="flex items-center gap-5">
               <div className="w-16 h-16 rounded-full border border-gray-300 shrink-0">
                 <img
-                  src={job?.organization?.user.avatar}
-                  alt={job?.organization?.user.name}
+                  src={job?.organization?.user?.avatar}
+                  alt={job?.organization?.user?.username}
                   className="w-full h-full rounded-full object-cover"
                 />
               </div>
               <div>
                 <h1 className="text-[#504ED7] text-lg">{job?.position}</h1>
-                <p className="text-xs mt-2">{job?.organization?.user.name}</p>
+                <p className="text-xs mt-2">{job?.organization?.user?.username}</p>
               </div>
             </div>
             {isApplied ? (
@@ -167,7 +167,7 @@ const JobDetail = ({ job }: IProps) => {
             <p className="font-medium mb-4 mt-6">Company Location</p>
             <p className="mb-3 text-sm leading-realxed">
               {province}, {city}, {district},{" "}
-              {job?.organization?.user.postalCode}
+              {job?.organization?.user?.postalCode}
             </p>
             <p className="mb-7 text-sm leading-realxed">
               {job?.organization?.address}
@@ -182,7 +182,7 @@ const JobDetail = ({ job }: IProps) => {
       <RecheckCVModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        company={job.organization?.user.name as string}
+        company={job.organization?.user?.username as string}
         position={job.position}
         onClick={handleApplyJob}
       />

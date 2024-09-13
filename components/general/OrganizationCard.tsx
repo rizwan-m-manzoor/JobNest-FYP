@@ -26,14 +26,14 @@ const OrganizationCard = ({ data }: IProps) => {
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full border border-gray-300 shrink-0">
             <img
-              src={data.job.organization?.user.avatar}
-              alt={data.job.organization?.user.name}
+              src={data.job.organization?.user?.avatar}
+              alt={data.job.organization?.user?.username}
               className="w-full h-full rounded-full object-cover"
             />
           </div>
           <div>
             <h1 className="text-lg font-medium">
-              {data.job.organization?.user.name}
+              {data.job.organization?.user?.username}
             </h1>
             <p className="text-sm text-gray-700 mt-2">{data.job.position}</p>
           </div>
@@ -62,7 +62,7 @@ const OrganizationCard = ({ data }: IProps) => {
                 onClick={() =>
                   dispatch(
                     changeInvitationStatus({
-                      id: `${data._id}`,
+                      id: `${data.id}`,
                       status: "accepted",
                       token: `${auth.accessToken}`,
                     })
@@ -76,7 +76,7 @@ const OrganizationCard = ({ data }: IProps) => {
                 onClick={() =>
                   dispatch(
                     changeInvitationStatus({
-                      id: `${data._id}`,
+                      id: `${data.id}`,
                       status: "rejected",
                       token: `${auth.accessToken}`,
                     })

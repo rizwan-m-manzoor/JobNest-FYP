@@ -15,12 +15,12 @@ const JobContainer = ({ jobs }: IProps) => {
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10">
         {jobs.map((item) => (
           <JobCard
-            id={item._id as string}
-            key={item._id}
-            logo={item.organization?.user.avatar as string}
-            organization={item.organization?.user.name as string}
-            province={`${item.organization?.user.province}`}
-            city={`${item.organization?.user.city}`}
+            id={item.id as string}
+            key={item.id}
+            logo={item.organization?.user?.avatar as string}
+            organization={item.organization?.user?.username as string}
+            province={`${item.organization?.user?.province}`}
+            city={`${item.organization?.user?.city}`}
             description={item.overview}
             title={item.position}
             salary={item.salary}

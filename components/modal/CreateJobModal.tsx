@@ -21,6 +21,8 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
   const [position, setPosition] = useState("");
   const [jobLevel, setJobLevel] = useState("");
   const [employmentType, setEmploymentType] = useState("");
+  const [experienceRequired, setExperienceRequired] = useState(0);
+  const [expirationDate, setExpirationDate] = useState("");
   const [salary, setSalary] = useState(0);
   const [keywords, setKeywords] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -92,6 +94,24 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
       });
     }
 
+    if (experienceRequired < 0) {
+      return dispatch({
+        type: "alert/alert",
+        payload: { error: "Please provide experience required." },
+      });
+    }
+
+    if (
+      !expirationDate ||
+      expirationDate === "" ||
+      !(new Date(expirationDate) >= new Date())
+    ) {
+      return dispatch({
+        type: "alert/alert",
+        payload: { error: "Please provide valid expiration date." },
+      });
+    }
+
     if (skills.length < 1) {
       return dispatch({
         type: "alert/alert",
@@ -102,7 +122,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
     if (salary < 10000) {
       return dispatch({
         type: "alert/alert",
-        payload: { error: "Salary should be at least IDR 10.000" },
+        payload: { error: "Salary should be at least PKR 10000" },
       });
     }
 
@@ -143,13 +163,15 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
           jobLevel,
           category,
           employmentType,
+          experienceRequired,
+          expirationDate,
           skills,
           keywords,
           salary,
           requirements: requirement,
           overview: description,
           token: `${auth.accessToken}`,
-          id: `${selectedItem._id}`,
+          id: `${selectedItem.id}`,
         })
       );
     } else {
@@ -159,6 +181,8 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
           jobLevel,
           category,
           employmentType,
+          experienceRequired,
+          expirationDate,
           skills,
           keywords,
           salary,
@@ -190,8 +214,17 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const res = await getDataAPI("category", auth.accessToken);
-      setCategoryData(res.data.categories);
+      const res = await getDataAPI("categories", auth.accessToken);
+      const mappedResponse = res.data.data?.map(({ id, attributes }: any) => {
+        const { name, image } = attributes;
+
+        return {
+          id,
+          name,
+          image,
+        };
+      });
+      setCategoryData(mappedResponse);
     };
 
     fetchCategory();
@@ -205,6 +238,8 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
       setPosition(selectedItem.position);
       setJobLevel(selectedItem.jobLevel);
       setEmploymentType(selectedItem.employmentType);
+      setExperienceRequired(selectedItem.experienceRequired);
+      setExpirationDate(selectedItem.expirationDate);
       setSalary(selectedItem.salary);
       setKeywords(selectedItem.keywords);
       setCategory(selectedItem.category as string);
@@ -217,6 +252,8 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
       setPosition("");
       setJobLevel("");
       setEmploymentType("");
+      setExperienceRequired(0);
+      setExpirationDate("");
       setSalary(0);
       setKeywords([]);
       setCategory("");
@@ -272,7 +309,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
               >
                 <option value="">- Category -</option>
                 {categoryData.map((item) => (
-                  <option key={item._id} value={item._id}>
+                  <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
                 ))}
@@ -316,6 +353,33 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
               </select>
             </div>
             <div className="mb-6">
+              <label htmlFor="experienceRequired" className="text-sm">
+                Experience Required
+              </label>
+              <input
+                type="number"
+                id="experienceRequired"
+                name="experienceRequired"
+                value={experienceRequired}
+                onChange={(e) => setExperienceRequired(+e.target.value)}
+                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+                min={0}
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="expirationDate" className="text-sm">
+                Expiration Date
+              </label>
+              <input
+                type="date"
+                id="expirationDate"
+                name="expirationDate"
+                value={expirationDate}
+                onChange={(e) => setExpirationDate(e.target.value)}
+                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+              />
+            </div>
+            <div className="mb-6">
               <label htmlFor="skills" className="text-sm">
                 Skills Required (Separate with comma (,))
               </label>
@@ -352,7 +416,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="salary"
                 name="salary"
                 value={salary}
-                onChange={(e) => setSalary(parseInt(e.target.value))}
+                onChange={(e) => setSalary(+e.target.value)}
                 className="outline-0 border border-gray-300 mt-3 rounded-md w-full text-sm px-2 h-10"
                 min={1}
               />

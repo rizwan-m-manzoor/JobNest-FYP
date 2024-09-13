@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import CandidatesClient from "./CandidatesClient";
 
-export async function getServerSideData(query: any) {
+async function getServerSideData(query: any) {
   let url = `${process.env.CLIENT_URL}/api/jobseeker`;
 
   const search = query.q;

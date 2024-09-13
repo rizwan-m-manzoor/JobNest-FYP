@@ -1,11 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IEditProfile, IUserLogin, IAuth } from "./../../utils/Interface";
-import {
-  getDataAPI,
-  patchDataAPI,
-  postDataAPI,
-  putDataAPI,
-} from "./../../utils/fetchData";
+import { postDataAPI, putDataAPI } from "./../../utils/fetchData";
 import { uploadFile } from "./../../utils/uploadHelper";
 import Cookie from "js-cookie";
 

@@ -37,7 +37,7 @@ export const changeApplicantStatus = createAsyncThunk(
       const state = (thunkAPI.getState() as RootState).applicant
       await patchDataAPI(`jobs-applied/status/${data.jobseeker}`, { job: data.jobId, status: data.status }, data.token)
 
-      return state.map((item: IApplicant) => item.job === data.jobId && item.jobseeker._id === data.jobseeker ? { ...item, status: data.status } : item)
+      return state.map((item: IApplicant) => item.job === data.jobId && item.jobseeker.id === data.jobseeker ? { ...item, status: data.status } : item)
     } catch (err: any) {
       thunkAPI.dispatch({
         type: 'alert/alert',

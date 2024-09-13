@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./../store";
-import { deleteDataAPI, getDataAPI, putDataAPI } from "./../../utils/fetchData";
+import { getDataAPI, putDataAPI } from "./../../utils/fetchData";
 import { IOrganization, IOrganizationState } from "./../../utils/Interface";
 
 interface IGetOrganizationType {

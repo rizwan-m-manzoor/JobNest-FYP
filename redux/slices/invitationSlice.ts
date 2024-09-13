@@ -81,7 +81,7 @@ export const changeInvitationStatus = createAsyncThunk(
         }
       })
 
-      return state.map((item: IInvitation) => item._id === data.id ? { ...item, status: data.status } : item)
+      return state.map((item: IInvitation) => item.id === data.id ? { ...item, status: data.status } : item)
     } catch (err: any) {
       thunkAPI.dispatch({
         type: 'alert/alert',

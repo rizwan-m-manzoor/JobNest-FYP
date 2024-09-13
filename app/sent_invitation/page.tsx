@@ -61,7 +61,7 @@ const SentInvitation = () => {
             ) : (
               <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
                 {data.map((item) => (
-                  <InvitationCard key={item._id} item={item} />
+                  <InvitationCard key={item.id} item={item} />
                 ))}
               </div>
             )}

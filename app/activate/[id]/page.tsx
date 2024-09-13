@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import ActivateAccountClient from "./ActivateAccountClient";
 
-export async function getServerSideData(id: string) {
+async function getServerSideData(id: string) {
   try {
     const res = await axios.post(
       `${process.env.CLIENT_URL}/api/auth/activate`,

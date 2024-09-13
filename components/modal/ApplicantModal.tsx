@@ -71,7 +71,7 @@ const ApplicantModal = ({ openModal, setOpenModal, jobId }: IProps) => {
         ) : (
           <div className="p-7 grid lg:grid-cols-2 grid-cols-1 gap-8">
             {applicant.map((item) => (
-              <UserCard key={item._id} isApplicant={true} item={item} />
+              <UserCard key={item.id} isApplicant={true} item={item} />
             ))}
           </div>
         )}

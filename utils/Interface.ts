@@ -13,6 +13,7 @@ export interface IJobseeker {
   status?: string;
   skills?: string[];
   about?: string;
+  user?: IUser
 }
 
 export interface IEditProfile {
@@ -107,6 +108,8 @@ export interface IJob {
   employmentType: string;
   jobLevel: string;
   skills: string[];
+  experienceRequired: number;
+  expirationDate: string;
   salary: number;
   overview: string;
   requirements: string;

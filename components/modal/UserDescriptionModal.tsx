@@ -52,7 +52,7 @@ const UserDescriptionModal = () => {
           <>
             <div className="modal-box-header">
               <h1 className="font-medium text-lg">
-                {(userDescription as IJobseeker)?.user.name} Profile
+                {(userDescription as IJobseeker)?.user?.username} Profile
               </h1>
               <AiOutlineClose
                 onClick={() =>
@@ -66,8 +66,8 @@ const UserDescriptionModal = () => {
                 <div className="flex items-center gap-5">
                   <div className="w-20 h-20 bg-gray-200 rounded-full shrink-0 shadow-xl border border-gray-300">
                     <img
-                      src={(userDescription as IJobseeker)?.user.avatar}
-                      alt={(userDescription as IJobseeker)?.user.name}
+                      src={(userDescription as IJobseeker)?.user?.avatar}
+                      alt={(userDescription as IJobseeker)?.user?.username}
                       className="w-full h-full rounded-full"
                     />
                   </div>
@@ -76,7 +76,7 @@ const UserDescriptionModal = () => {
               <div className="mb-8">
                 <h1 className="font-medium text-lg">Skills</h1>
                 <div className="flex items-center gap-3 mt-3">
-                  {(userDescription as IJobseeker)?.skills.map((item) => (
+                  {(userDescription as IJobseeker)?.skills?.map((item) => (
                     <p
                       key={item}
                       className="bg-gray-200 text-sm rounded-full px-3 py-1 w-fit truncate"
@@ -94,7 +94,7 @@ const UserDescriptionModal = () => {
               </div>
               {(userDescription as IJobseeker)?.cv ? (
                 <Link
-                  href={`/cv/${(userDescription as IJobseeker)?._id}`}
+                  href={`/cv/${(userDescription as IJobseeker)?.id}`}
                   target="_blank"
                   className="bg-red-500 block text-center hover:bg-red-600 transition-[background] w-full rounded-md text-white py-2"
                 >

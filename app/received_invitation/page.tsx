@@ -43,7 +43,7 @@ const ReceivedInvitation = () => {
         ) : (
           <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
             {invitation.map((item) => (
-              <OrganizationCard key={item._id} data={item} />
+              <OrganizationCard key={item.id} data={item} />
             ))}
           </div>
         )}

@@ -25,20 +25,21 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
   const job = useSelector((state: RootState) => state.job);
 
   useEffect(() => {
-    if (item?.jobseeker.user.province || info?.user.province) {
+    if (item?.jobseeker.user?.province || info?.user?.province) {
       setProvince(
-        info ? info?.user.province || "" : item?.jobseeker.user.province || ""
+        info ? info?.user?.province || "" : item?.jobseeker.user?.province || ""
       );
     }
 
     return () => setProvince("Not provided.");
-  }, [info, item?.jobseeker.user.province]);
+  }, [info, item?.jobseeker.user?.province]);
 
   return (
     <>
       <div
         className={`bg-white rounded-md border border-gray-200 shadow-md p-5 cursor-pointer hover:scale-105 transition-[transform] ${
-          auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "Authenticated"
+          auth.user?.role?.name !== "organization" &&
+          auth.user?.role?.name !== "Authenticated"
             ? "blur-lg"
             : undefined
         }`}
@@ -46,19 +47,21 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
         <div className="flex items-center gap-5">
           <div className="w-16 h-16 rounded-full bg-gray-300 shrink-0 shadow-xl border border-gray-300">
             <img
-              src={info ? info.user.avatar : item?.jobseeker.user.avatar}
-              alt={info ? info.user.name : item?.jobseeker.user.name}
+              src={info ? info.user?.avatar : item?.jobseeker.user?.avatar}
+              alt={info ? info.user?.username : item?.jobseeker.user?.username}
               className="w-full h-full rounded-full"
             />
           </div>
           <div>
             <h1 className="font-medium text-lg">
-              {info ? info.user.name : item?.jobseeker.user.name}
+              {info ? info.user?.username : item?.jobseeker.user?.username}
             </h1>
             <p className="text-sm text-gray-500 mt-2">
               Joined at:{" "}
               {new Date(
-                `${info ? info.user.createdAt : item?.jobseeker.user.createdAt}`
+                `${
+                  info ? info.user?.createdAt : item?.jobseeker.user?.createdAt
+                }`
               ).toLocaleDateString()}
             </p>
           </div>
@@ -66,7 +69,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
         <div className="flex items-center gap-2 mt-5">
           {info ? (
             <>
-              {info?.skills.map((item) => (
+              {info?.skills?.map((item) => (
                 <p
                   key={item}
                   className="bg-gray-200 rounded-full px-3 py-1 text-xs w-fit truncate"
@@ -77,7 +80,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
             </>
           ) : (
             <>
-              {item?.jobseeker.skills.map((item) => (
+              {item?.jobseeker.skills?.map((item) => (
                 <p
                   key={item}
                   className="bg-gray-200 rounded-full px-3 py-1 text-xs w-fit truncate"
@@ -114,7 +117,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
                       dispatch(
                         changeApplicantStatus({
                           jobId: `${item?.job}`,
-                          jobseeker: `${item?.jobseeker._id}`,
+                          jobseeker: `${item?.jobseeker.id}`,
                           status: "accepted",
                           token: `${auth.accessToken}`,
                         })
@@ -129,7 +132,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
                       dispatch(
                         changeApplicantStatus({
                           jobId: `${item?.job}`,
-                          jobseeker: `${item?.jobseeker._id}`,
+                          jobseeker: `${item?.jobseeker.id}`,
                           status: "rejected",
                           token: `${auth.accessToken}`,
                         })
@@ -169,8 +172,8 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
         <HireModal
           openModal={openHireModal}
           setOpenModal={setOpenHireModal}
-          userName={info.user.name}
-          id={info.user?._id}
+          userName={info.user?.username || ""}
+          id={info.user?.id || ""}
           job={job.data}
         />
       )}

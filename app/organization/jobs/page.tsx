@@ -53,7 +53,7 @@ const OrganizationJobs = () => {
 
   const handleDeleteJob = () => {
     dispatch(
-      deleteJob({ id: `${selectedItem._id}`, token: `${auth.accessToken}` })
+      deleteJob({ id: `${selectedItem.id}`, token: `${auth.accessToken}` })
     );
     setOpenDeleteModal(false);
   };
@@ -113,13 +113,15 @@ const OrganizationJobs = () => {
                         <th>Job Level</th>
                         <th>Employment Type</th>
                         <th>Posted Date</th>
+                        <th>Experience Required</th>
+                        <th>Expiration Date</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {job.data.map((item, idx) => (
                         <tr
-                          key={item._id}
+                          key={item.id}
                           className="text-center bg-[#F9F9FF] text-sm"
                         >
                           <td className="p-3">{idx + 1}</td>
@@ -129,6 +131,14 @@ const OrganizationJobs = () => {
                           <td>{`${new Date(
                             item.createdAt!
                           ).toLocaleDateString()}`}</td>
+                          <td>{item.experienceRequired}</td>
+                          <td>{`${
+                            item.expirationDate
+                              ? new Date(
+                                  item.expirationDate!
+                                ).toLocaleDateString()
+                              : ""
+                          }`}</td>
                           <td>
                             <button
                               onClick={() => handleClickDetail(item)}
@@ -192,7 +202,7 @@ const OrganizationJobs = () => {
       <ApplicantModal
         openModal={openApplicantModal}
         setOpenModal={setOpenApplicantModal}
-        jobId={selectedItem._id as string}
+        jobId={selectedItem.id as string}
       />
 
       <CreateJobModal

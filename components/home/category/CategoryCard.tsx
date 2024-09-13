@@ -1,21 +1,24 @@
 interface IProps {
-  title: string
-  total: number
-  image: string
+  id: string;
+  title: string;
+  total: number;
+  image: string;
 }
 
-const CategoryCard = ({ title, total, image }: IProps) => {
+const CategoryCard = ({ id, title, total, image }: IProps) => {
   return (
-    <div className='bg-white p-7 flex gap-4'>
-      <div className='w-12 h-12 rounded-md shrink-0'>
+    <div className="bg-white p-7 flex gap-4">
+      <div className="w-12 h-12 rounded-md shrink-0">
         <img src={image} alt={title} />
       </div>
       <div>
-        <h2 className='font-medium'>{title}</h2>
-        <p className='mt-2 text-xs text-gray-500'>{total} {total > 1 ? 'jobs' :'job'} available</p>
+        <h2 className="font-medium">{title}</h2>
+        <p className="mt-2 text-xs text-gray-500">
+          {total} {total > 1 ? "jobs" : "job"} available
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryCard
+export default CategoryCard;

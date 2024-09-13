@@ -35,15 +35,15 @@ const OrganizationDetailModal = ({
   }, [openModal]);
 
   useEffect(() => {
-    setProvince(selectedOrganization.user?.province);
+    setProvince(selectedOrganization.user?.province || '');
   }, [selectedOrganization.user?.province]);
 
   useEffect(() => {
-    setCity(selectedOrganization.user?.city);
+    setCity(selectedOrganization.user?.city || '');
   }, [selectedOrganization.user?.city]);
 
   useEffect(() => {
-    setDistrict(selectedOrganization.user?.district);
+    setDistrict(selectedOrganization.user?.district || '');
   }, [selectedOrganization.user?.district]);
 
   return (
@@ -72,13 +72,13 @@ const OrganizationDetailModal = ({
             <div className="w-20 h-20 rounded-full border border-gray-300 shadow-xl shrink-0">
               <img
                 src={selectedOrganization.user?.avatar}
-                alt={selectedOrganization.user?.name}
+                alt={selectedOrganization.user?.username}
                 className="w-full h-full rounded-full object-cover"
               />
             </div>
             <div>
               <h1 className="font-medium text-lg">
-                {selectedOrganization.user?.name}
+                {selectedOrganization.user?.username}
               </h1>
               <p className="text-gray-500 mt-2 text-sm">
                 {province}, {city}, {district},{" "}

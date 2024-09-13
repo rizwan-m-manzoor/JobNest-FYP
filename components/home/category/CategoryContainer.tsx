@@ -13,7 +13,8 @@ const CategoryContainer = ({ categories }: IProps) => {
         {
           categories.map(item => (
             <CategoryCard
-              key={item._id}
+              key={item.id}
+              id={item.id}
               title={item.name}
               total={item.count}
               image={item.image}

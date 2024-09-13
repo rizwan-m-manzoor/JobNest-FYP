@@ -1,15 +1,15 @@
-import { IJob } from '../utils/Interface';
-import Head from 'next/head';
-import Navbar from '../components/general/Navbar';
-import Footer from '../components/general/Footer';
-import ReviewContainer from '../components/home/review/ReviewContainer';
-import JobContainer from '../components/home/job/JobContainer';
-import CategoryContainer from '../components/home/category/CategoryContainer';
-import Jumbotron from '../components/home/Jumbotron';
-import axios from 'axios';
+import { IJob } from "../utils/Interface";
+import Head from "next/head";
+import Navbar from "../components/general/Navbar";
+import Footer from "../components/general/Footer";
+import ReviewContainer from "../components/home/review/ReviewContainer";
+import JobContainer from "../components/home/job/JobContainer";
+import CategoryContainer from "../components/home/category/CategoryContainer";
+import Jumbotron from "../components/home/Jumbotron";
+import axios from "axios";
 
 export interface ICategories {
-  _id: string;
+  id: string;
   name: string;
   count: number;
   image: string;
@@ -21,8 +21,20 @@ interface IProps {
 }
 
 export default async function Home() {
-  // const res = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/auth/local`);
-  // const { latestJob: latestJobs, categoryDisplay: categories } = res.data;
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs/latest-and-categories`
+  );
+  const { latestJobs, categoryDisplay: categories } = res.data;
+
+  const mappedLatestJobs = latestJobs?.map((item: any) => ({
+    ...item,
+    organization: {
+      ...item?.organization,
+      user: item?.organization?.users_permissions_user,
+    },
+    skills: item?.skills?.map((skill: any) => skill.jobSeekerSkill) || [],
+    keywords: item?.keywords?.map((keyword: any) => keyword.jobKeyword) || [],
+  }));
 
   return (
     <>
@@ -32,8 +44,8 @@ export default async function Home() {
       <Navbar />
       <div>
         <Jumbotron />
-        {/* <CategoryContainer categories={categories} />
-        <JobContainer jobs={latestJobs} /> */}
+        <CategoryContainer categories={categories} />
+        <JobContainer jobs={mappedLatestJobs} />
         <ReviewContainer />
       </div>
       <Footer />

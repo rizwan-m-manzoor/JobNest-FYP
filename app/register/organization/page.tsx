@@ -462,7 +462,7 @@ const Organization = () => {
                   {avatar.length > 0 && (
                     <img
                       src={URL.createObjectURL(avatar[0])}
-                      alt={organizationData.name}
+                      alt={organizationData.username}
                       className="w-full h-full rounded-full object-contain"
                     />
                   )}

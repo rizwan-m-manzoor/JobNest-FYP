@@ -75,7 +75,7 @@ const CandidatesClient = ({ data, searchParams }: IProps) => {
         ) : (
           <>
             {data.map((item) => (
-              <UserCard key={item._id} info={item} isApplicant={false} />
+              <UserCard key={item.id} info={item} isApplicant={false} />
             ))}
           </>
         )}

@@ -16,12 +16,12 @@ const JobCard = ({ item, isApplied, status, appliedAt }: IProps) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/job/${item?._id}`);
+    router.push(`/job/${item?.id}`);
   };
 
   useEffect(() => {
-    setProvince(item?.organization?.user.province || "");
-  }, [item?.organization?.user.province]);
+    setProvince(item?.organization?.user?.province || "");
+  }, [item?.organization?.user?.province]);
 
   return (
     <div
@@ -31,14 +31,14 @@ const JobCard = ({ item, isApplied, status, appliedAt }: IProps) => {
       <div className="flex items-center gap-3 mb-7">
         <div className="w-16 h-16 rounded-full border border-gray-300 shrink-0">
           <img
-            src={item?.organization?.user.avatar}
-            alt={item?.organization?.user.name}
+            src={item?.organization?.user?.avatar}
+            alt={item?.organization?.user?.username}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
         <div>
           <p className="text-[#504ED7] text-lg">{item?.position}</p>
-          <p className="mt-1 text-xs">{item?.organization?.user.name}</p>
+          <p className="mt-1 text-xs">{item?.organization?.user?.username}</p>
         </div>
       </div>
       <div className="flex items-center gap-3">

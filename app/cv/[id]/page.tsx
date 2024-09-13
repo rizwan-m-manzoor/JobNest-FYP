@@ -51,11 +51,11 @@ const JobseekerCV = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Head>
-        <title>Job Nest | {data.user?.name} CV</title>
+        <title>Job Nest | {data.user?.username} CV</title>
       </Head>
       <Navbar />
       <div className="md:py-10 py-7 md:px-16 px-8">
-        <h1 className="text-2xl font-medium">{data.user?.name} CV</h1>
+        <h1 className="text-2xl font-medium">{data.user?.username} CV</h1>
         {data.cv ? (
           <div className="mt-5">
             <PDFViewer file={`${data.cv}`} />

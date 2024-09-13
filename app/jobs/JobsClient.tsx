@@ -130,7 +130,7 @@ const JobsClient = ({ data, searchParams }: IProps) => {
         ) : (
           <div className="grid gap-8 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
             {jobs.map((item) => (
-              <JobCard key={item._id} item={item} />
+              <JobCard key={item.id} item={item} />
             ))}
           </div>
         )}

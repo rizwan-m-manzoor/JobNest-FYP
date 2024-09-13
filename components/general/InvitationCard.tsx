@@ -36,12 +36,12 @@ const InvitationCard = ({ item }: IProps) => {
         <div className="w-16 h-16 rounded-full border border-gray-300">
           <img
             src={jobseeker.user?.avatar}
-            alt={jobseeker.user?.name}
+            alt={jobseeker.user?.username}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
         <div>
-          <h1>{jobseeker.user?.name}</h1>
+          <h1>{jobseeker.user?.username}</h1>
           <p className="text-gray-500 text-sm mt-2">{item.job.position}</p>
         </div>
       </div>

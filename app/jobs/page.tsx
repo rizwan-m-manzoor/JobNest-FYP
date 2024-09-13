@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import JobsClient from "./JobsClient";
 
-export async function getServerSideData(query: any) {
+async function getServerSideData(query: any) {
   const { q, jobLevel, employmentType, salary } = query;
 
   let url = `${process.env.CLIENT_URL}/api/job/all?`;
