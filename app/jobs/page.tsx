@@ -5,40 +5,78 @@ import JobsClient from "./JobsClient";
 async function getServerSideData(query: any) {
   const { q, jobLevel, employmentType, salary } = query;
 
-  let url = `${process.env.CLIENT_URL}/api/job/all?`;
+  // Base URL with populate parameters
+  let url = `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs?populate[skills]=true&populate[keywords]=true&populate[organization][populate][users_permissions_user]=true&`;
 
+  // Append the query parameter `q` if it exists
   if (q) {
-    url += `q=${q}&`;
+    url += `filters[position][$containsi]=${q}&`;
   }
 
+  // Append the `jobLevel` filter(s)
   if (jobLevel) {
     if (Array.isArray(jobLevel)) {
-      jobLevel.forEach((level: string, index: number) => {
-        url += `jobLevel=${level}${index !== jobLevel.length - 1 ? "&" : ""}`;
+      jobLevel.forEach((level: string) => {
+        url += `filters[jobLevel][$eq]=${level}&`;
       });
     } else {
-      url += `jobLevel=${jobLevel}&`;
+      url += `filters[jobLevel][$eq]=${jobLevel}&`;
     }
   }
 
+  // Append the `employmentType` filter(s)
   if (employmentType) {
     if (Array.isArray(employmentType)) {
-      employmentType.forEach((type: string, index: number) => {
-        url += `employmentType=${type}${
-          index !== employmentType.length - 1 ? "&" : ""
-        }`;
+      employmentType.forEach((type: string) => {
+        url += `filters[employmentType][$eq]=${type}&`;
       });
     } else {
-      url += `employmentType=${employmentType}&`;
+      url += `filters[employmentType][$eq]=${employmentType}&`;
     }
   }
 
+  // Append the `salary` filter
   if (salary) {
-    url += `salary=${salary}&`;
+    url += `filters[salary][$eq]=${salary}&`;
   }
 
-  const res = await axios.get(url);
-  return res.data.jobs;
+  // Remove the trailing '&' at the end of the URL string
+  url = url.endsWith("&") ? url.slice(0, -1) : url;
+
+  try {
+    const res = await axios.get(url);
+
+    const mappedResponse = res.data?.data?.map(({ id, attributes }: any) => {
+      const { organization, skills, keywords, ...restAttributes } = attributes;
+
+      const { users_permissions_user, ...restOrganizationAttributes } =
+        organization.data.attributes;
+
+      return {
+        id,
+        ...restAttributes,
+        organization: {
+          id: organization?.data?.id,
+          ...restOrganizationAttributes,
+          user: {
+            id: users_permissions_user?.data?.id,
+            ...users_permissions_user?.data?.attributes,
+          },
+        },
+        skills: skills.data?.map(
+          (item: any) => item?.attributes?.jobSeekerSkill
+        ),
+        keywords: keywords.data?.map(
+          (item: any) => item?.attributes?.jobKeyword
+        ),
+      };
+    });
+
+    return mappedResponse;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
 }
 
 export default async function JobsPage({

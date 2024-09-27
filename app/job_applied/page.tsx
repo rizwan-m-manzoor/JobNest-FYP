@@ -32,12 +32,51 @@ const JobApplied = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await getDataAPI("jobs-applied", `${auth.accessToken}`);
-        setData(res.data.jobs);
+        const res = await getDataAPI(
+          `jobs-applieds?populate[job][populate][keywords]=true&populate[job][populate][skills]=true&populate[job][populate][organization][populate][users_permissions_user]=true&filters[job_seeker][id][$eq]=${auth.user?.job_seeker?.id}`,
+          `${auth.accessToken}`
+        );
+
+        const mappedResponse = res.data?.data?.map(
+          ({ id, attributes }: any) => {
+            const { job, ...restAttributes } = attributes;
+
+            const { organization, skills, keywords, ...restJobAttributes } =
+              job.data.attributes;
+
+            const { users_permissions_user, ...restOrganizationAttributes } =
+              organization.data.attributes;
+
+            return {
+              id,
+              ...restAttributes,
+              job: {
+                id: job.data.id,
+                ...restJobAttributes,
+                organization: {
+                  id: organization?.data?.id,
+                  ...restOrganizationAttributes,
+                  user: {
+                    id: users_permissions_user?.data?.id,
+                    ...users_permissions_user?.data?.attributes,
+                  },
+                },
+                skills: skills.data?.map(
+                  (item: any) => item?.attributes?.jobSeekerSkill
+                ),
+                keywords: keywords.data?.map(
+                  (item: any) => item?.attributes?.jobKeyword
+                ),
+              },
+            };
+          }
+        );
+
+        setData(mappedResponse);
       } catch (err: any) {
         dispatch({
           type: "alert/alert",
-          payload: { error: err.response.data.msg },
+          payload: { error: err.response.data.error.message },
         });
       }
       setLoading(false);

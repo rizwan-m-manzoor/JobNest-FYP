@@ -41,20 +41,27 @@ const JobDetail = ({ job }: IProps) => {
   const handleApplyJob = async () => {
     try {
       const res = await postDataAPI(
-        "job/apply",
-        { job: job?.id, userId: auth.user?.id },
+        "jobs-applieds",
+        {
+          data: {
+            job: job?.id,
+            job_seeker: auth.user?.job_seeker?.id,
+            status: 'on review'
+          },
+        },
         `${auth.accessToken}`
       );
+      
       dispatch({
         type: "alert/alert",
-        payload: { success: res.data.msg },
+        payload: "Job applied successfully.",
       });
 
       setIsApplied(true);
     } catch (err: any) {
       dispatch({
         type: "alert/alert",
-        payload: { error: err.response.data.msg },
+        payload: { error: err.response.data.error.message },
       });
     }
 
@@ -64,10 +71,14 @@ const JobDetail = ({ job }: IProps) => {
   useEffect(() => {
     const fetchAppliedStatus = async () => {
       const res = await getDataAPI(
-        `jobs-applied/status/${job.id}`,
+        `jobs-applieds?filters[job][id][$eq]=${job.id}&populate=job`,
         auth.accessToken
       );
-      setIsApplied(res.data.isApplied);
+      if (res.data?.data.length) {
+        setIsApplied(true);
+      } else {
+        setIsApplied(false);
+      }
     };
 
     if (auth.accessToken && auth.user?.role?.name === "jobseeker") {
@@ -108,7 +119,9 @@ const JobDetail = ({ job }: IProps) => {
               </div>
               <div>
                 <h1 className="text-[#504ED7] text-lg">{job?.position}</h1>
-                <p className="text-xs mt-2">{job?.organization?.user?.username}</p>
+                <p className="text-xs mt-2">
+                  {job?.organization?.user?.username}
+                </p>
               </div>
             </div>
             {isApplied ? (
@@ -144,6 +157,23 @@ const JobDetail = ({ job }: IProps) => {
                   {item}
                 </p>
               ))}
+            </div>
+            <p className="font-medium mb-4">Experience Required</p>
+            <div className="flex items-center mb-7">
+              <p className="font-semibold text-lg">
+                {job?.experienceRequired}{" "}
+                <span className="text-gray-500 text-xs">year</span>
+              </p>
+            </div>
+            <p className="font-medium mb-4">Expiration Date</p>
+            <div className="flex items-center mb-7">
+              <p className="font-semibold text-lg">
+                {`${
+                  job?.expirationDate
+                    ? new Date(job?.expirationDate!).toLocaleDateString()
+                    : ""
+                }`}
+              </p>
             </div>
             <p className="font-medium mb-4">Requirements</p>
             <div

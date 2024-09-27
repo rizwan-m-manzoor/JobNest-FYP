@@ -30,32 +30,40 @@ const JobsClient = ({ data, searchParams }: IProps) => {
 
   const handleFilter = (e?: FormSubmit) => {
     e?.preventDefault();
+
     let url = "/jobs?";
+    const queryParams: string[] = [];
 
+    // Append search term if it exists
     if (search) {
-      url += `q=${search}&`;
+      queryParams.push(`q=${search}`);
     }
 
+    // Append selected job levels if any are selected
     if (selectedJobLevel.length > 0) {
-      selectedJobLevel.forEach((level, index) => {
-        url += `jobLevel=${level}${
-          index !== selectedJobLevel.length - 1 ? "&" : ""
-        }`;
+      selectedJobLevel.forEach((level) => {
+        queryParams.push(`jobLevel=${level}`);
       });
     }
 
+    // Append selected employment types if any are selected
     if (selectedEmploymentType.length > 0) {
-      selectedEmploymentType.forEach((type, index) => {
-        url += `employmentType=${type}${
-          index !== selectedEmploymentType.length - 1 ? "&" : ""
-        }`;
+      selectedEmploymentType.forEach((type) => {
+        queryParams.push(`employmentType=${type}`);
       });
     }
 
+    // Append minimum salary if greater than 0
     if (minSalary > 0) {
-      url += `salary=${minSalary}&`;
+      queryParams.push(`salary=${minSalary}`);
     }
 
+    // Construct the final URL by joining all query parameters with '&'
+    if (queryParams.length > 0) {
+      url += queryParams.join("&");
+    }
+
+    // Redirect using the constructed URL
     router.push(url);
   };
 
