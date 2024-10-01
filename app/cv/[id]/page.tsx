@@ -23,14 +23,19 @@ const JobseekerCV = ({ params }: { params: { id: string } }) => {
     const fetchData = async () => {
       try {
         const res = await getDataAPI(
-          `jobseeker/cv/${jobseekerId}`,
+          `job-seekers/${jobseekerId}?[populate][users_permissions_user]=true`,
           auth.accessToken
         );
-        setData(res.data.jobseeker);
+        const formattedData = {
+          ...res.data?.data?.attributes,
+          user: res.data?.data?.attributes?.users_permissions_user?.data
+            ?.attributes,
+        };
+        setData(formattedData);
       } catch (err: any) {
         dispatch({
           type: "alert/alert",
-          payload: { error: err.response.data.msg },
+          payload: { error: err.response.data.error.message },
         });
       }
     };
@@ -42,7 +47,10 @@ const JobseekerCV = ({ params }: { params: { id: string } }) => {
     if (!auth.accessToken) {
       router.push(`/login?r=cv/${jobseekerId}`);
     } else {
-      if (auth.user?.role?.name !== "organization" && auth.user?.role?.name !== "Authenticated") {
+      if (
+        auth.user?.role?.name !== "organization" &&
+        auth.user?.role?.name !== "Authenticated"
+      ) {
         router.push("/");
       }
     }

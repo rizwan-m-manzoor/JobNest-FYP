@@ -28,16 +28,82 @@ export const getJobPosition = createAsyncThunk(
   "job/position",
   async (token: string, thunkAPI) => {
     try {
-      const res = await getDataAPI("job/position", token);
+      const userAuthState = (thunkAPI.getState() as RootState).auth;
+
+      const res = await getDataAPI(
+        `jobs?populate=*&filters[organization][$eq]=${userAuthState.user?.organization?.id}`,
+        token
+      );
+
+      const mappedResponse = res.data.data?.map(({ id, attributes }: any) => {
+        const {
+          category,
+          createdAt,
+          updatedAt,
+          publishedAt,
+          employmentType,
+          experienceRequired,
+          expirationDate,
+          invitations,
+          jobLevel,
+          jobs_applieds,
+          keywords,
+          organization,
+          overview,
+          position,
+          requirements,
+          salary,
+          skills,
+        } = attributes;
+
+        const {
+          organization: userOrganization,
+          ...userObjectWithoutOrganization
+        } = userAuthState.user || {};
+
+        return {
+          id,
+          category: category?.data?.id,
+          createdAt,
+          updatedAt,
+          publishedAt,
+          employmentType,
+          experienceRequired,
+          expirationDate,
+          jobLevel,
+          keywords: keywords?.data?.map(
+            (item: any) => item?.attributes?.jobKeyword
+          ),
+          organization: {
+            id: organization?.data?.id,
+            address: organization?.data?.attributes?.address,
+            createdDate: organization?.data?.attributes?.createdDate,
+            description: organization?.data?.attributes?.description,
+            industryType: organization?.data?.attributes?.industryType,
+            phoneNumber: organization?.data?.attributes?.phoneNumber,
+            status: organization?.data?.attributes?.status,
+            totalEmployee: organization?.data?.attributes?.totalEmployee,
+            user: userObjectWithoutOrganization,
+          },
+          overview,
+          position,
+          requirements,
+          salary,
+          skills: skills?.data?.map(
+            (item: any) => item?.attributes?.jobSeekerSkill
+          ),
+        };
+      });
+
       return {
-        data: res.data.position,
+        data: mappedResponse,
         page: 1,
       };
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
         payload: {
-          error: err.response.data.msg,
+          error: err.response.data.error.message,
         },
       });
     }
@@ -132,7 +198,7 @@ export const getJobs = createAsyncThunk(
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
-        payload: { error: err.response.data.msg },
+        payload: { error: err.response.data.error.message },
       });
     }
   }

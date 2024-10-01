@@ -19,10 +19,19 @@ const InvitationCard = ({ item }: IProps) => {
   useEffect(() => {
     const fetchJobseeker = async () => {
       const res = await getDataAPI(
-        `jobseeker/${item.user}`,
+        `users/${item.user?.id}?[populate][job_seeker][populate][skills]=true`,
         `${auth.accessToken}`
       );
-      setJobseeker(res.data.jobseeker);
+      const formattedResponse = {
+        user: {
+          ...res.data,
+        },
+        ...res.data?.job_seeker,
+        skills: res.data?.job_seeker?.skills?.map(
+          (item: any) => item?.jobSeekerSkill
+        ),
+      };
+      setJobseeker(formattedResponse);
     };
 
     if (auth.accessToken) {

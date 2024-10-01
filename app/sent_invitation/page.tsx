@@ -22,8 +22,23 @@ const SentInvitation = () => {
   useEffect(() => {
     const fetchInvitation = async () => {
       setLoading(true);
-      const res = await getDataAPI("invitation", `${auth.accessToken}`);
-      setData(res.data.invitations);
+      const res = await getDataAPI(
+        "invitations?[populate][users_permissions_user]=true&[populate][job]=true",
+        `${auth.accessToken}`
+      );
+      const mappedData = res.data?.data?.map(({ id, attributes }: any) => ({
+        id,
+        ...attributes,
+        user: {
+          id: attributes?.users_permissions_user?.data?.id,
+          ...attributes?.users_permissions_user?.data?.attributes,
+        },
+        job: {
+          id: attributes?.job?.data?.id,
+          ...attributes?.job?.data?.attributes,
+        },
+      }));
+      setData(mappedData);
       setLoading(false);
     };
 

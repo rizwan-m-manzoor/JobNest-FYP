@@ -59,7 +59,7 @@ const CandidatesClient = ({ data, searchParams }: IProps) => {
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="Job title or keyword"
+            placeholder="Search on Skills"
             className="w-full outline-0 px-3 rounded-full text-sm"
           />
           <button className="outline-0 bg-[#504ED7] hover:bg-[#2825C2] transition-[background] px-5 py-2 text-white text-sm rounded-full">
