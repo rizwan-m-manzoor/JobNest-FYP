@@ -103,96 +103,98 @@ const Jobseeker = () => {
         <title>Job Nest | Jobseeker Register</title>
       </Head>
       <Navbar />
-      <div className="bg-[#FAFAFA] px-10 py-14">
-        <div className="bg-white w-full max-w-[600px] border border-gray-300 m-auto px-8 py-12">
-          <h1 className="text-xl text-center mb-7 text-gray-600">Sign Up</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
-              <AiOutlineUser className="text-lg text-gray-500" />
-              <input
-                type="text"
-                name="username"
-                value={userData.username}
-                onChange={handleChange}
-                placeholder="Name"
-                className="outline-0 w-full text-sm"
-              />
-            </div>
-            <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
-              <AiOutlineUser className="text-lg text-gray-500" />
-              <input
-                type="text"
-                name="email"
-                value={userData.email}
-                onChange={handleChange}
-                placeholder="Email address"
-                className="outline-0 w-full text-sm"
-              />
-            </div>
-            <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
-              <BiLock className="text-lg text-gray-500" />
-              <div className="flex items-center w-full">
+      <div className="flex flex-col" style={{ minHeight: "70vh" }}>
+        <div className="bg-[#FAFAFA] px-10 py-14 flex-grow">
+          <div className="bg-white w-full max-w-[600px] border border-gray-300 m-auto px-8 py-12">
+            <h1 className="text-xl text-center mb-7 text-gray-600">Sign Up</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
+                <AiOutlineUser className="text-lg text-gray-500" />
                 <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={userData.password}
+                  type="text"
+                  name="username"
+                  value={userData.username}
                   onChange={handleChange}
-                  placeholder="Password"
-                  className="outline-0 w-full text-sm pr-3"
+                  placeholder="Name"
+                  className="outline-0 w-full text-sm"
                 />
-                {showPassword ? (
-                  <AiFillEyeInvisible
-                    onClick={() => setShowPassword(false)}
-                    className="cursor-pointer text-gray-500"
-                  />
-                ) : (
-                  <AiFillEye
-                    onClick={() => setShowPassword(true)}
-                    className="cursor-pointer text-gray-500"
-                  />
-                )}
               </div>
-            </div>
-            <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3">
-              <BiLock className="text-lg text-gray-500" />
-              <div className="flex items-center w-full">
+              <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
+                <AiOutlineUser className="text-lg text-gray-500" />
                 <input
-                  type={showPasswordConfirmation ? "text" : "password"}
-                  name="passwordConfirmation"
-                  value={userData.passwordConfirmation}
+                  type="text"
+                  name="email"
+                  value={userData.email}
                   onChange={handleChange}
-                  placeholder="Password confirmation"
-                  className="outline-0 w-full text-sm pr-3"
+                  placeholder="Email address"
+                  className="outline-0 w-full text-sm"
                 />
-                {showPasswordConfirmation ? (
-                  <AiFillEyeInvisible
-                    onClick={() => setShowPasswordConfirmation(false)}
-                    className="cursor-pointer text-gray-500"
-                  />
-                ) : (
-                  <AiFillEye
-                    onClick={() => setShowPasswordConfirmation(true)}
-                    className="cursor-pointer text-gray-500"
-                  />
-                )}
               </div>
-            </div>
-            <button
-              className={`${
-                alert.loading
-                  ? "bg-gray-200 hover:bg-gray-200 cursor-auto"
-                  : "bg-[#504ED7] hover:bg-[#2825C2] cursor-pointer"
-              } transition-[background] text-sm w-full py-3 text-white rounded-sm mt-7`}
-            >
-              {alert.loading ? <Loader /> : "SIGN UP"}
-            </button>
-          </form>
-          <p className="mt-8 text-gray-400 text-sm text-center">
-            Already have an account?{" "}
-            <Link href="/login" className="outline-0 text-blue-500">
-              Sign in
-            </Link>
-          </p>
+              <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
+                <BiLock className="text-lg text-gray-500" />
+                <div className="flex items-center w-full">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={userData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className="outline-0 w-full text-sm pr-3"
+                  />
+                  {showPassword ? (
+                    <AiFillEyeInvisible
+                      onClick={() => setShowPassword(false)}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  ) : (
+                    <AiFillEye
+                      onClick={() => setShowPassword(true)}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3">
+                <BiLock className="text-lg text-gray-500" />
+                <div className="flex items-center w-full">
+                  <input
+                    type={showPasswordConfirmation ? "text" : "password"}
+                    name="passwordConfirmation"
+                    value={userData.passwordConfirmation}
+                    onChange={handleChange}
+                    placeholder="Password confirmation"
+                    className="outline-0 w-full text-sm pr-3"
+                  />
+                  {showPasswordConfirmation ? (
+                    <AiFillEyeInvisible
+                      onClick={() => setShowPasswordConfirmation(false)}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  ) : (
+                    <AiFillEye
+                      onClick={() => setShowPasswordConfirmation(true)}
+                      className="cursor-pointer text-gray-500"
+                    />
+                  )}
+                </div>
+              </div>
+              <button
+                className={`${
+                  alert.loading
+                    ? "bg-gray-200 hover:bg-gray-200 cursor-auto"
+                    : "bg-[#504ED7] hover:bg-[#2825C2] cursor-pointer"
+                } transition-[background] text-sm w-full py-3 text-white rounded-sm mt-7`}
+              >
+                {alert.loading ? <Loader /> : "SIGN UP"}
+              </button>
+            </form>
+            <p className="mt-8 text-gray-400 text-sm text-center">
+              Already have an account?{" "}
+              <Link href="/login" className="outline-0 text-blue-500">
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
       <Footer />

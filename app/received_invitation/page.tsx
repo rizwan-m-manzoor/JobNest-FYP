@@ -34,19 +34,21 @@ const ReceivedInvitation = () => {
         <title>Job Nest | Received Invitation</title>
       </Head>
       <Navbar />
-      <div className="md:py-10 py-6 md:px-16 px-8">
-        <h1 className="text-xl font-medium">Received Invitation</h1>
-        {invitation.length === 0 ? (
-          <div className="mt-6 bg-red-500 text-white py-3 rounded-md text-center">
-            There's no received invitation data found.
-          </div>
-        ) : (
-          <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
-            {invitation.map((item) => (
-              <OrganizationCard key={item.id} data={item} />
-            ))}
-          </div>
-        )}
+      <div className="flex flex-col" style={{ minHeight: "70vh" }}>
+        <div className="md:py-10 py-6 md:px-16 px-8 flex-grow">
+          <h1 className="text-xl font-medium">Received Invitation</h1>
+          {invitation.length === 0 ? (
+            <div className="mt-6 bg-red-500 text-white py-3 rounded-md text-center">
+              There's no received invitation data found.
+            </div>
+          ) : (
+            <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
+              {invitation.map((item) => (
+                <OrganizationCard key={item.id} data={item} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <Footer />
     </>

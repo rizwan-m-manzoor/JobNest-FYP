@@ -63,25 +63,27 @@ const SentInvitation = () => {
         <title>Job Nest | Sent Invitation</title>
       </Head>
       <Navbar />
-      <div className="md:py-10 py-6 md:px-16 px-8">
-        <h1 className="text-xl font-medium">Sent Invitation</h1>
-        {loading ? (
-          <Loader size="xl" />
-        ) : (
-          <>
-            {data.length === 0 ? (
-              <div className="mt-6 bg-red-500 text-center text-white text-sm rounded-md py-3">
-                There's no sent invitation data found.
-              </div>
-            ) : (
-              <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
-                {data.map((item) => (
-                  <InvitationCard key={item.id} item={item} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
+      <div className="flex flex-col" style={{ minHeight: "70vh" }}>
+        <div className="md:py-10 py-6 md:px-16 px-8 flex-grow">
+          <h1 className="text-xl font-medium">Sent Invitation</h1>
+          {loading ? (
+            <Loader size="xl" />
+          ) : (
+            <>
+              {data.length === 0 ? (
+                <div className="mt-6 bg-red-500 text-center text-white text-sm rounded-md py-3">
+                  There's no sent invitation data found.
+                </div>
+              ) : (
+                <div className="mt-6 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-10 gap-8">
+                  {data.map((item) => (
+                    <InvitationCard key={item.id} item={item} />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
       <Footer />
     </>
