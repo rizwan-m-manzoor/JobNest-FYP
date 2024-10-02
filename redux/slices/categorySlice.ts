@@ -66,7 +66,7 @@ export const getCategory = createAsyncThunk(
       thunkAPI.dispatch({
         type: "alert/alert",
         payload: {
-          error: err.response.data.msg,
+          error: err.response.data.error.message,
         },
       });
     }

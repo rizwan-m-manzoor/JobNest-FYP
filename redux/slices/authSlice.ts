@@ -137,7 +137,7 @@ export const editProfile = createAsyncThunk(
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
-        payload: { error: err.response.data.msg },
+        payload: { error: err.response.data.error.message },
       });
     }
   }

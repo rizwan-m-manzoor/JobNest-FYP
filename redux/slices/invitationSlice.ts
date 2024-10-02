@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./../store";
-import { getDataAPI, patchDataAPI, postDataAPI } from "./../../utils/fetchData";
+import { getDataAPI, postDataAPI, putDataAPI } from "./../../utils/fetchData";
 import { IInvitation } from "./../../utils/Interface";
 
 export interface ISendInvitationType {
@@ -61,9 +61,53 @@ export const getReceivedInvitations = createAsyncThunk(
         },
       });
 
-      const res = await getDataAPI("invitation", token);
+      const res = await getDataAPI(
+        "invitations?populate[job][populate][skills]=true&populate[job][populate][keywords]=true&populate[job][populate][organization][populate][users_permissions_user]=true&populate[job][populate][category]=true",
+        token
+      );
 
-      return res.data.invitations;
+      const mappedResponse = res.data?.data?.map(({ id, attributes }: any) => {
+        const { job, ...restAttributes } = attributes;
+
+        const {
+          category,
+          organization,
+          skills,
+          keywords,
+          ...restJobAttributes
+        } = job.data.attributes;
+
+        const { users_permissions_user, ...restOrganizationAttributes } =
+          organization.data.attributes;
+
+        return {
+          id,
+          ...restAttributes,
+          job: {
+            id: job.data.id,
+            ...restJobAttributes,
+            organization: {
+              id: organization?.data?.id,
+              ...restOrganizationAttributes,
+              user: {
+                id: users_permissions_user?.data?.id,
+                ...users_permissions_user?.data?.attributes,
+              },
+            },
+            skills: skills.data?.map(
+              (item: any) => item?.attributes?.jobSeekerSkill
+            ),
+            keywords: keywords.data?.map(
+              (item: any) => item?.attributes?.jobKeyword
+            ),
+            category: category?.data?.id,
+          },
+        };
+      });
+
+      console.log(mappedResponse, "here at mappedResponse");
+
+      return mappedResponse;
     } catch (err: any) {
       thunkAPI.dispatch({
         type: "alert/alert",
@@ -81,16 +125,19 @@ export const changeInvitationStatus = createAsyncThunk(
     try {
       const state = (thunkAPI.getState() as RootState).invitation;
 
-      const res = await patchDataAPI(
-        `invitation/${data.id}`,
-        { status: data.status },
+      const res = await putDataAPI(
+        `invitations/${data.id}`,
+        { data: { status: data.status } },
         data.token
       );
 
       thunkAPI.dispatch({
         type: "alert/alert",
         payload: {
-          success: res.data.msg,
+          success:
+            res.data.data.attributes.status === "accepted"
+              ? "Invitation accepted successfully."
+              : "Invitation rejected.",
         },
       });
 

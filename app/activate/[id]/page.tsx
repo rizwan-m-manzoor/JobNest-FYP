@@ -5,7 +5,7 @@ import ActivateAccountClient from "./ActivateAccountClient";
 async function getServerSideData(id: string) {
   try {
     const res = await axios.post(
-      `${process.env.CLIENT_URL}/api/auth/activate`,
+      `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/auth/activate`,
       {
         token: id,
       }
@@ -13,7 +13,7 @@ async function getServerSideData(id: string) {
 
     return { success: res.data.msg };
   } catch (err: any) {
-    return { error: err.response?.data?.msg };
+    return { error: err.response.data.error.message };
   }
 }
 

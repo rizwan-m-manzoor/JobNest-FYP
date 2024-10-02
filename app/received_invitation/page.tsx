@@ -36,7 +36,7 @@ const ReceivedInvitation = () => {
       <Navbar />
       <div className="md:py-10 py-6 md:px-16 px-8">
         <h1 className="text-xl font-medium">Received Invitation</h1>
-        {invitation.length !== 0 ? (
+        {invitation.length === 0 ? (
           <div className="mt-6 bg-red-500 text-white py-3 rounded-md text-center">
             There's no received invitation data found.
           </div>

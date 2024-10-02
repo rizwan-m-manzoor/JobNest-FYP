@@ -138,7 +138,7 @@ const EditProfile = () => {
       } catch (err: any) {
         dispatch({
           type: "alert/alert",
-          payload: { error: err.response.data.msg },
+          payload: { error: err.response.error.message },
         });
       }
     };
