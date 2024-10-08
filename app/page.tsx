@@ -21,10 +21,12 @@ interface IProps {
 }
 
 export default async function Home() {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs/latest-and-categories`
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs/latest-and-categories`,
+    { next: { revalidate: 60 } }
   );
-  const { latestJobs, categoryDisplay: categories } = res.data;
+  const data = await res.json();
+  const { latestJobs, categoryDisplay: categories } = data;
 
   const mappedLatestJobs = latestJobs?.map((item: any) => ({
     ...item,
