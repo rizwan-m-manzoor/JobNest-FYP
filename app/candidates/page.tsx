@@ -14,13 +14,16 @@ async function getServerSideData(query: any, cookies: any) {
     url += `&filters[skills][jobSeekerSkill][$containsi]=${search}`;
   }
 
-  const res = await axios.get(url, {
+  const res = await fetch(url, {
     headers: {
       Authorization: loginData?.accessToken ? `Bearer ${loginData?.accessToken}` : "",
     },
+    next: { revalidate: 30 }
   });
 
-  const mappedResponse = res.data?.data?.map(({ id, attributes }: any) => {
+  const data = await res.json();
+
+  const mappedResponse = data?.data?.map(({ id, attributes }: any) => {
     const { users_permissions_user, skills, ...restAttributes } = attributes;
 
     return {

@@ -2,11 +2,13 @@ import axios from "axios";
 
 export async function getJobData(id: string) {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs/${id}`
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/api/jobs/${id}`,
+      { next: { revalidate: 30 } }
     );
 
-    const { organization, keywords, skills, ...restData } = res.data;
+    const data = await res.json();
+    const { organization, keywords, skills, ...restData } = data;
     const { users_permissions_user, ...organizationWithoutUser } = organization;
 
     const formattedData = {

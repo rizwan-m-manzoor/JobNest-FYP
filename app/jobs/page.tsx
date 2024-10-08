@@ -44,9 +44,10 @@ async function getServerSideData(query: any) {
   url = url.endsWith("&") ? url.slice(0, -1) : url;
 
   try {
-    const res = await axios.get(url);
+    const res = await fetch(url, { next: { revalidate: 30 } });
+    const data = await res.json();
 
-    const mappedResponse = res.data?.data?.map(({ id, attributes }: any) => {
+    const mappedResponse = data?.data?.map(({ id, attributes }: any) => {
       const { organization, skills, keywords, ...restAttributes } = attributes;
 
       const { users_permissions_user, ...restOrganizationAttributes } =
