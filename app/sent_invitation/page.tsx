@@ -23,7 +23,7 @@ const SentInvitation = () => {
     const fetchInvitation = async () => {
       setLoading(true);
       const res = await getDataAPI(
-        `invitations?[populate][users_permissions_user]=true&[populate][job]=true&filters[organization][$eq]=${auth.user?.organization?.id}`,
+        `invitations?[populate][users_permissions_user]=true&[populate][job]=true&filters[users_permissions_user][organization][$eq]=${auth.user?.organization?.id}`,
         `${auth.accessToken}`
       );
       const mappedData = res.data?.data?.map(({ id, attributes }: any) => ({
