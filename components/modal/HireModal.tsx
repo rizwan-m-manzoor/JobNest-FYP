@@ -84,7 +84,7 @@ const HireModal = ({ openModal, setOpenModal, userName, id, job }: IProps) => {
               name="position"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
-              className="bg-background w-full h-10 px-2 rounded-md bg-white border border-gray-300 text-sm"
+              className="bg-background w-full h-10 px-2 rounded-md border border-gray-300 text-sm"
             >
               <option value="">- Select Position -</option>
               {job.map((item) => (

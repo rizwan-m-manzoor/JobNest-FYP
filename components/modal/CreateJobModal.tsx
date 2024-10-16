@@ -305,7 +305,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               >
                 <option value="">- Category -</option>
                 {categoryData.map((item) => (
@@ -324,7 +324,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="jobLevel"
                 value={jobLevel}
                 onChange={(e) => setJobLevel(e.target.value)}
-                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               >
                 <option value="">- Job Level -</option>
                 <option value="internship">Internship</option>
@@ -343,7 +343,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="employmentType"
                 value={employmentType}
                 onChange={(e) => setEmploymentType(e.target.value)}
-                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               >
                 <option value="">- Employment Type -</option>
                 <option value="fullTime">Full Time</option>

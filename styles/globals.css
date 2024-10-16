@@ -95,7 +95,7 @@
   }
 
   .modal-box {
-    @apply transition-transform bg-white w-full rounded-md;
+    @apply transition-transform bg-background w-full rounded-md;
   }
 
   .modal-box-header {
