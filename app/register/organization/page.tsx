@@ -231,7 +231,7 @@ const Organization = () => {
         <h1 className="text-center mb-10 text-2xl font-semibold text-[#504ED7]">
           Recruit Better With Job Nest
         </h1>
-        <div className="bg-white w-full max-w-[1000px] border border-gray-300 m-auto px-8 py-12">
+        <div className="bg-background shadow-md w-full max-w-[1000px] border border-gray-300 m-auto px-8 py-12">
           <form onSubmit={handleSubmit}>
             <div className="flex md:flex-row flex-col md:items-center gap-7 md:mb-10 mb-7">
               <div className="flex-1">
@@ -244,7 +244,7 @@ const Organization = () => {
                   name="username"
                   value={organizationData.username}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
               <div className="flex-1">
@@ -257,7 +257,7 @@ const Organization = () => {
                   name="email"
                   value={organizationData.email}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -273,7 +273,7 @@ const Organization = () => {
                     name="password"
                     value={organizationData.password}
                     onChange={handleChangeInput}
-                    className="w-full outline-0 text-sm"
+                    className="bg-background w-full outline-0 text-sm"
                   />
                   {showPassword ? (
                     <AiFillEyeInvisible
@@ -299,7 +299,7 @@ const Organization = () => {
                     name="passwordConfirmation"
                     value={organizationData.passwordConfirmation}
                     onChange={handleChangeInput}
-                    className="outline-0 w-full text-sm pr-3"
+                    className="bg-background outline-0 w-full text-sm pr-3"
                   />
                   {showPasswordConfirmation ? (
                     <AiFillEyeInvisible
@@ -326,7 +326,7 @@ const Organization = () => {
                   name="phoneNumber"
                   value={organizationData.phoneNumber}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
               <div className="flex-1">
@@ -339,7 +339,7 @@ const Organization = () => {
                   name="createdDate"
                   value={organizationData.createdDate}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -354,7 +354,7 @@ const Organization = () => {
                   name="totalEmployee"
                   value={organizationData.totalEmployee}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                   min={1}
                 />
               </div>
@@ -368,7 +368,7 @@ const Organization = () => {
                   name="industryType"
                   value={organizationData.industryType}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -382,7 +382,7 @@ const Organization = () => {
                   value={organizationData.province}
                   onChange={handleChangeInput}
                   id="province"
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
                 >
                   <option value="">- Select Province -</option>
                   {provinceData.map((item) => (
@@ -401,7 +401,7 @@ const Organization = () => {
                   id="city"
                   value={organizationData.city}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md bg-transparent"
                 >
                   <option value="">- Select City -</option>
                   {cityData.map((item, index) => (
@@ -423,7 +423,7 @@ const Organization = () => {
                   value={organizationData.district}
                   onChange={handleChangeInput}
                   id="district"
-                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                  className="bg-background w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 />
               </div>
               <div className="flex-1">
@@ -436,7 +436,7 @@ const Organization = () => {
                   id="postalCode"
                   value={organizationData.postalCode}
                   onChange={handleChangeInput}
-                  className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -450,7 +450,7 @@ const Organization = () => {
                 id="address"
                 value={organizationData.address}
                 onChange={handleChangeInput}
-                className="outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                className="bg-background outline-0 mt-3 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
               />
             </div>
             <div className="md:mb-10 mb-7">
@@ -472,7 +472,7 @@ const Organization = () => {
                   accept="image/*"
                   id="logo"
                   onChange={handleChangeImage}
-                  className="outline-0 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
+                  className="bg-background outline-0 w-full px-3 text-sm h-10 border border-gray-300 rounded-md"
                 />
               </div>
             </div>

@@ -26,7 +26,7 @@ const JobCard = ({ item, isApplied, status, appliedAt }: IProps) => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white rounded-md border border-gray-200 p-5 cursor-pointer"
+      className="bg-card shadow-md rounded-md border border-gray-200 p-5 cursor-pointer"
     >
       <div className="flex items-center gap-3 mb-7">
         <div className="w-16 h-16 rounded-full border border-gray-300 shrink-0">

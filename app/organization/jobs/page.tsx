@@ -123,7 +123,7 @@ const OrganizationJobs = () => {
                         {job.data.map((item, idx) => (
                           <tr
                             key={item.id}
-                            className="text-center bg-[#F9F9FF] text-sm"
+                            className="text-center bg-card text-sm"
                           >
                             <td className="p-3">{idx + 1}</td>
                             <td>{item.position}</td>

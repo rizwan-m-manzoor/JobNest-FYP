@@ -87,7 +87,7 @@ const Filter = ({
           <p className='text-sm'>Job Level</p>
           <AiFillCaretDown />
         </div>
-        <div className={`absolute top-[100%] left-0 mt-3 w-[250px] ${openJobLevel ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-white rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
+        <div className={`absolute top-[100%] left-0 mt-3 w-[250px] ${openJobLevel ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-background rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
           <div className='flex items-center gap-2'>
             <input type='checkbox' id='internship' checked={selectedJobLevel.includes('internship') ? true : false} value='internship' onChange={handleChangeJobLevel} />
             <label htmlFor='internship'>Internship</label>
@@ -116,7 +116,7 @@ const Filter = ({
           <p className='text-sm'>Employment Type</p>
           <AiFillCaretDown />
         </div>
-        <div className={`absolute top-[100%] left-0 mt-3 w-[250px] ${openEmploymentType ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-white rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
+        <div className={`absolute top-[100%] left-0 mt-3 w-[250px] ${openEmploymentType ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-background rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
           <div className='flex items-center gap-2'>
             <input type='checkbox' id='fullTime' checked={selectedEmploymentType.includes('fullTime') ? true : false} value='fullTime' onChange={handleChangeEmploymentType} />
             <label htmlFor='fullTime'>Full Time</label>
@@ -141,7 +141,7 @@ const Filter = ({
           <p className='text-sm'>Salary</p>
           <AiFillCaretDown />
         </div>
-        <div className={`absolute top-[100%] md:left-0 right-0 mt-3 w-[350px] ${openSalary ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-white rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
+        <div className={`absolute top-[100%] md:left-0 right-0 mt-3 w-[350px] ${openSalary ? 'scale-y-1' : 'scale-y-0'} transition-[transform] origin-top bg-background rounded-md border border-gray-200 shadow-md text-sm p-3 flex flex-col gap-3`}>
           <input type='number' placeholder='Minimum salary' value={minSalary} onChange={e => setMinSalary(parseInt(e.target.value))} className='outline-0 w-full border border-gray-200 rounded-md shadow-sm h-10 px-2 mb-2' />
           <button onClick={handleFilter} className='bg-[#504ED7] hover:bg-[#2825C2] transition-[background] text-sm w-full py-2 text-white rounded-sm mt-3'>Apply Filter</button>
         </div>

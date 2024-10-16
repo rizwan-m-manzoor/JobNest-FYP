@@ -87,8 +87,8 @@ const Login = () => {
       </Head>
       <Navbar />
       <div className="flex flex-col" style={{ minHeight: "70vh" }}>
-        <div className="bg-[#FAFAFA] px-10 py-14 flex-grow">
-          <div className="bg-white w-full max-w-[400px] border border-gray-300 m-auto px-6 py-12">
+        <div className="bg-background px-10 py-14 flex-grow">
+          <div className="bg-background shadow-md w-full max-w-[400px] border border-gray-300 m-auto px-6 py-12">
             <h1 className="text-xl text-center mb-7 text-gray-600">
               Sign In to Job Nest
             </h1>
@@ -104,7 +104,7 @@ const Login = () => {
                   value={userData.identifier}
                   onChange={handleChange}
                   placeholder="me@example.com"
-                  className="w-full outline-0 border border-gray-300 px-2 py-3 text-sm rounded-md mt-3"
+                  className="bg-background w-full outline-0 border border-gray-300 px-2 py-3 text-sm rounded-md mt-3"
                 />
               </div>
               <div>
@@ -118,7 +118,7 @@ const Login = () => {
                     name="password"
                     value={userData.password}
                     onChange={handleChange}
-                    className="w-full outline-0 text-sm"
+                    className="bg-background w-full outline-0 text-sm"
                   />
                   {showPassword ? (
                     <AiFillEyeInvisible

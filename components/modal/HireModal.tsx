@@ -72,7 +72,7 @@ const HireModal = ({ openModal, setOpenModal, userName, id, job }: IProps) => {
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[500px] max-h-[600px] overflow-auto hide-scrollbar`}
+        } bg-background modal-box max-w-[500px] max-h-[600px] overflow-auto hide-scrollbar`}
       >
         <div className="modal-box-header">
           <h1 className="text-lg font-medium">Hire {userName} As</h1>
@@ -84,7 +84,7 @@ const HireModal = ({ openModal, setOpenModal, userName, id, job }: IProps) => {
               name="position"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
-              className="w-full h-10 px-2 rounded-md bg-white border border-gray-300 text-sm"
+              className="bg-background w-full h-10 px-2 rounded-md bg-white border border-gray-300 text-sm"
             >
               <option value="">- Select Position -</option>
               {job.map((item) => (

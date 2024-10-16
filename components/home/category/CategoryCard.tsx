@@ -7,7 +7,7 @@ interface IProps {
 
 const CategoryCard = ({ id, title, total, image }: IProps) => {
   return (
-    <div className="bg-white p-7 flex gap-4">
+    <div className="bg-accent p-7 flex gap-4">
       <div className="w-12 h-12 rounded-md shrink-0">
         <img src={image} alt={title} />
       </div>

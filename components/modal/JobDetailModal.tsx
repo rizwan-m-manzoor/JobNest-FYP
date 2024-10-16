@@ -77,7 +77,7 @@ const InvitationDetailModal = ({
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[600px] h-[550px] overflow-auto hide-scrollbar`}
+        } modal-box max-w-[600px] h-[550px] overflow-auto hide-scrollbar bg-card`}
       >
         <div className="modal-box-header">
           <h1 className="font-medium text-lg">Job Detail</h1>

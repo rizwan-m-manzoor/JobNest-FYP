@@ -105,7 +105,7 @@ const Jobseeker = () => {
       <Navbar />
       <div className="flex flex-col" style={{ minHeight: "70vh" }}>
         <div className="bg-[#FAFAFA] px-10 py-14 flex-grow">
-          <div className="bg-white w-full max-w-[600px] border border-gray-300 m-auto px-8 py-12">
+          <div className="bg-background shadow-md w-full max-w-[600px] border border-gray-300 m-auto px-8 py-12">
             <h1 className="text-xl text-center mb-7 text-gray-600">Sign Up</h1>
             <form onSubmit={handleSubmit}>
               <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
@@ -116,7 +116,7 @@ const Jobseeker = () => {
                   value={userData.username}
                   onChange={handleChange}
                   placeholder="Name"
-                  className="outline-0 w-full text-sm"
+                  className="bg-background outline-0 w-full text-sm"
                 />
               </div>
               <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
@@ -127,7 +127,7 @@ const Jobseeker = () => {
                   value={userData.email}
                   onChange={handleChange}
                   placeholder="Email address"
-                  className="outline-0 w-full text-sm"
+                  className="bg-background outline-0 w-full text-sm"
                 />
               </div>
               <div className="flex items-center gap-3 border border-gray-300 rounded-md h-12 px-3 mb-7">
@@ -139,7 +139,7 @@ const Jobseeker = () => {
                     value={userData.password}
                     onChange={handleChange}
                     placeholder="Password"
-                    className="outline-0 w-full text-sm pr-3"
+                    className="bg-background outline-0 w-full text-sm pr-3"
                   />
                   {showPassword ? (
                     <AiFillEyeInvisible
@@ -163,7 +163,7 @@ const Jobseeker = () => {
                     value={userData.passwordConfirmation}
                     onChange={handleChange}
                     placeholder="Password confirmation"
-                    className="outline-0 w-full text-sm pr-3"
+                    className="bg-background outline-0 w-full text-sm pr-3"
                   />
                   {showPasswordConfirmation ? (
                     <AiFillEyeInvisible

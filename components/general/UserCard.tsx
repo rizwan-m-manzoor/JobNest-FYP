@@ -37,7 +37,7 @@ const UserCard = ({ isApplicant, item, info }: IProps) => {
   return (
     <>
       <div
-        className={`bg-white rounded-md border border-gray-200 shadow-md p-5 cursor-pointer hover:scale-105 transition-[transform] ${
+        className={`bg-card rounded-md border border-gray-200 shadow-md p-5 cursor-pointer hover:scale-105 transition-[transform] ${
           auth.user?.role?.name !== "organization" &&
           auth.user?.role?.name !== "Authenticated"
             ? "blur-lg"

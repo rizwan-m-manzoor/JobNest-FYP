@@ -31,7 +31,7 @@ const JobContainer = ({ jobs }: IProps) => {
       </div>
       <Link
         href="/jobs"
-        className="bg-white m-auto block w-fit mt-20 px-10 py-2 border-2 rounded-full border-[#504ED7] text-[#504ED7]"
+        className="m-auto block w-fit mt-20 px-10 py-2 border-2 rounded-full border-[#504ED7] text-[#504ED7]"
       >
         Find More Jobs
       </Link>

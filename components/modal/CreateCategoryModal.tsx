@@ -107,7 +107,7 @@ const CreateCategoryModal = ({
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[550px] overflow-auto hide-scrollbar`}
+        } bg-background modal-box max-w-[550px] overflow-auto hide-scrollbar`}
       >
         <div className="modal-box-header">
           <h1 className="font-medium text-lg">Create Category</h1>
@@ -128,7 +128,7 @@ const CreateCategoryModal = ({
                 name="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               />
             </div>
             <div className="mb-6">

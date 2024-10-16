@@ -45,7 +45,7 @@ const JobCard = ({
   return (
     <div
       onClick={() => router.push(`/job/${id}`)}
-      className="hover:border-2 border hover:border-[#504ED7] border-gray-200 shadow-md p-5 hover:scale-105 rounded-md transition-[transform] cursor-pointer"
+      className="hover:border-2 border hover:border-[#504ED7] border-gray-200 shadow-md p-5 hover:scale-105 rounded-md transition-[transform] cursor-pointer bg-card"
     >
       <div className="flex items-center gap-2">
         <div className="w-12 h-12 rounded-full border border-gray-300 shrink-0">

@@ -53,7 +53,7 @@ const ApplicantModal = ({ openModal, setOpenModal, jobId }: IProps) => {
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[950px] max-h-[600px] overflow-auto hide-scrollbar`}
+        } bg-background modal-box max-w-[950px] max-h-[600px] overflow-auto hide-scrollbar`}
       >
         <div className="modal-box-header">
           <h1 className="text-lg font-medium">Applicant List</h1>

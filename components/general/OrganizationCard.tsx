@@ -22,7 +22,7 @@ const OrganizationCard = ({ data }: IProps) => {
 
   return (
     <>
-      <div className="bg-white rounded-md border border-gray-200 shadow-md p-5">
+      <div className="bg-card rounded-md border border-gray-200 shadow-md p-5">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full border border-gray-300 shrink-0">
             <img

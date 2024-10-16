@@ -40,7 +40,7 @@ const InvitationCard = ({ item }: IProps) => {
   }, [auth, item.user]);
 
   return (
-    <div className="shadow-md rounded-md p-5 border border-gray-200">
+    <div className="bg-card shadow-md rounded-md p-5 border border-gray-200">
       <div className="flex items-center gap-6 mb-5">
         <div className="w-16 h-16 rounded-full border border-gray-300">
           <img

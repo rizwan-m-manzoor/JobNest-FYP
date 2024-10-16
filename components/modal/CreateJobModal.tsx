@@ -272,7 +272,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[609px] h-[600px] overflow-auto hide-scrollbar`}
+        } bg-background modal-box max-w-[609px] h-[600px] overflow-auto hide-scrollbar`}
       >
         <div className="modal-box-header">
           <h1 className="font-medium text-lg">Create Job</h1>
@@ -293,7 +293,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 name="position"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               />
             </div>
             <div className="mb-6">
@@ -305,7 +305,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
               >
                 <option value="">- Category -</option>
                 {categoryData.map((item) => (
@@ -324,7 +324,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="jobLevel"
                 value={jobLevel}
                 onChange={(e) => setJobLevel(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
               >
                 <option value="">- Job Level -</option>
                 <option value="internship">Internship</option>
@@ -343,7 +343,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 id="employmentType"
                 value={employmentType}
                 onChange={(e) => setEmploymentType(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10 bg-white"
               >
                 <option value="">- Employment Type -</option>
                 <option value="fullTime">Full Time</option>
@@ -362,7 +362,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 name="experienceRequired"
                 value={experienceRequired}
                 onChange={(e) => setExperienceRequired(+e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
                 min={0}
               />
             </div>
@@ -376,7 +376,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 name="expirationDate"
                 value={expirationDate}
                 onChange={(e) => setExpirationDate(e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
+                className="bg-background outline-0 border border-gray-300 mt-3 text-sm rounded-md w-full px-2 h-10"
               />
             </div>
             <div className="mb-6">
@@ -403,7 +403,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 <input
                   type="text"
                   onKeyUp={(e) => handleChangeSkills(e)}
-                  className="outline-0 text-sm w-full px-2 h-10 flex-1"
+                  className="bg-background outline-0 text-sm w-full px-2 h-10 flex-1"
                 />
               </div>
             </div>
@@ -417,7 +417,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 name="salary"
                 value={salary}
                 onChange={(e) => setSalary(+e.target.value)}
-                className="outline-0 border border-gray-300 mt-3 rounded-md w-full text-sm px-2 h-10"
+                className="bg-background outline-0 border border-gray-300 mt-3 rounded-md w-full text-sm px-2 h-10"
                 min={1}
               />
             </div>
@@ -457,7 +457,7 @@ const CreateJobModal = ({ openModal, setOpenModal, selectedItem }: IProps) => {
                 <input
                   type="text"
                   onKeyUp={(e) => handleChangeKeywords(e)}
-                  className="outline-0 text-sm w-full px-2 h-10 flex-1"
+                  className="bg-background outline-0 text-sm w-full px-2 h-10 flex-1"
                 />
               </div>
             </div>

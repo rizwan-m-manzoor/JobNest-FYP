@@ -7,7 +7,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex-1 border-r border-gray-400 flex flex-col gap-5 items-center py-7">
+    <div className="bg-secondary flex-1 border-gray-400 flex flex-col gap-5 items-center py-7">
       <Link
         href="/organization/approval"
         className={`block hover:bg-[#E2E1FF] hover:text-[#504ED7] ${

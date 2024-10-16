@@ -25,7 +25,7 @@ const DeleteModal = ({ openModal, setOpenModal, text, onSuccess }: IProps) => {
 
   return (
     <div className={`${openModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} modal-background`}>
-      <div ref={modalRef} className={`${openModal ? 'translate-y-0' : '-translate-y-12'} modal-box max-w-[500px] text-center p-7`}>
+      <div ref={modalRef} className={`${openModal ? 'translate-y-0' : '-translate-y-12'} bg-background modal-box max-w-[500px] text-center p-7`}>
         <Image src={DeleteImage} alt='Job Nest' />
         <h1 className='font-medium text-lg my-8'>Are you sure want to delete this {text}?</h1>
         <div className='flex items-center gap-5 justify-center text-sm'>

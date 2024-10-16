@@ -46,7 +46,7 @@ const UserDescriptionModal = () => {
         ref={modalRef}
         className={`${
           userDescription ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[600px] max-h-[550px] hide-scrollbar overflow-auto`}
+        } bg-background modal-box max-w-[600px] max-h-[550px] hide-scrollbar overflow-auto`}
       >
         {userDescription && (
           <>

@@ -35,7 +35,7 @@ const Register = () => {
               First of all, what do you want to do?
             </p>
             <div className="flex items-center gap-8 md:flex-row flex-col">
-              <div className="bg-white flex-1 py-16 px-5 rounded-md shadow-md border border-gray-200">
+              <div className="bg-background flex-1 py-16 px-5 rounded-md shadow-md border border-gray-200">
                 <h1 className="font-medium text-2xl">I am looking for work</h1>
                 <p className="text-sm mt-5 mb-10">
                   Create a <strong>jobseeker</strong> account.
@@ -48,7 +48,7 @@ const Register = () => {
                 </Link>
               </div>
               <strong>OR</strong>
-              <div className="bg-white flex-1 py-16 px-5 rounded-md shadow-md border border-gray-200">
+              <div className="bg-background flex-1 py-16 px-5 rounded-md shadow-md border border-gray-200">
                 <h1 className="font-medium text-2xl">I am looking to hire</h1>
                 <p className="text-sm mt-5 mb-10">
                   Create an <strong>organization</strong> account.

@@ -103,31 +103,33 @@ const JobApplied = () => {
         <title>Job Nest | Job Applied</title>
       </Head>
       <Navbar />
-      <div className="md:py-10 py-6 md:px-16 px-8">
-        <h1 className="text-xl font-medium">Job Applied</h1>
-        {loading ? (
-          <Loader size="xl" />
-        ) : (
-          <>
-            {data.length === 0 ? (
-              <div className="mt-6 bg-red-500 text-center text-white rounded-md py-3">
-                There's no job applied data found.
-              </div>
-            ) : (
-              <div className="mt-6 grid lg:grid-cols-2 grid-cols-1 md:gap-10 gap-5">
-                {data.map((item) => (
-                  <JobCard
-                    key={item._id}
-                    isApplied={true}
-                    item={item.job}
-                    status={item.status}
-                    appliedAt={item.createdAt}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        )}
+      <div className="flex flex-col" style={{ minHeight: "70vh" }}>
+        <div className="md:py-10 py-6 md:px-16 px-8 flex-grow">
+          <h1 className="text-xl font-medium">Job Applied</h1>
+          {loading ? (
+            <Loader size="xl" />
+          ) : (
+            <>
+              {data.length === 0 ? (
+                <div className="mt-6 bg-red-500 text-center text-white rounded-md py-3">
+                  There's no job applied data found.
+                </div>
+              ) : (
+                <div className="mt-6 grid lg:grid-cols-2 grid-cols-1 md:gap-10 gap-5">
+                  {data.map((item) => (
+                    <JobCard
+                      key={item._id}
+                      isApplied={true}
+                      item={item.job}
+                      status={item.status}
+                      appliedAt={item.createdAt}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
       <Footer />
     </>

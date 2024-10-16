@@ -43,7 +43,7 @@ const Navbar = () => {
   }, [openSidebar]);
 
   return (
-    <div className="flex items-center justify-between gap-10 lg:px-16 pl-4 pr-7 z-[999] py-3 bg-white sticky top-0 shadow-sm">
+    <div className="flex items-center justify-between gap-10 lg:px-16 pl-4 pr-7 z-[999] py-3 bg-secondary sticky top-0 shadow-sm">
       <div
         onClick={() => router.push("/")}
         className="flex items-center cursor-pointer"
@@ -58,7 +58,7 @@ const Navbar = () => {
         ref={sidebarRef}
         className={`lg:static fixed top-0 ${
           openSidebar ? "right-0" : "-right-[3000px]"
-        } transition-all bottom-0 lg:shadow-none shadow-xl lg:w-auto w-[200px] lg:p-0 p-7 bg-white lg:flex lg:flex-1`}
+        } transition-all bottom-0 lg:shadow-none shadow-xl lg:w-auto w-[200px] lg:p-0 p-7 bg-secondary lg:flex lg:flex-1`}
       >
         <AiOutlineClose
           onClick={() => setOpenSidebar(false)}

@@ -27,7 +27,7 @@ const Jumbotron = () => {
       <p className="text-gray-400 text-sm text-center">
         1,850,750 jobs listed here! Your dream job is waiting
       </p>
-      <div className="w-full max-w-[800px] m-auto bg-white shadow-xl border border-gray-200 md:rounded-full rounded-md md:h-16 h-auto md:py-0 py-6 px-4 mt-12">
+      <div className="w-full max-w-[800px] m-auto bg-background shadow-xl border border-gray-200 md:rounded-full rounded-md md:h-16 h-auto md:py-0 py-6 px-4 mt-12">
         <form
           onSubmit={handleSubmit}
           className="flex md:flex-row flex-col justify-between items-center h-full gap-3"
@@ -39,7 +39,7 @@ const Jumbotron = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Job title or keyword"
-              className="outline-0 h-full px-2 w-full text-sm"
+              className="bg-background outline-0 h-full px-2 w-full text-sm"
             />
           </div>
           <button className="bg-[#504ED7] hover:bg-[#2825C2] transition-[background] text-white text-sm px-6 py-2 rounded-full outline-0">

@@ -211,11 +211,11 @@ const EditProfile = () => {
         <title>Job Nest | My Profile</title>
       </Head>
       <Navbar />
-      <div className="md:py-14 py-7 md:px-16 px-8 bg-gray-100">
+      <div className="md:py-14 py-7 md:px-16 px-8 bg-neutral-100">
         <h1 className="text-3xl text-center mb-9 font-medium">
           <span className="text-[#504ED7]">Edit</span> Profile
         </h1>
-        <div className="w-full max-w-[700px] bg-white m-auto shadow-lg border border-gray-200 rounded-md p-6">
+        <div className="w-full max-w-[700px] bg-background m-auto shadow-lg border border-gray-200 rounded-md p-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label htmlFor="avatar" className="text-sm">
@@ -238,7 +238,7 @@ const EditProfile = () => {
                   accept="image/*"
                   id="avatar"
                   onChange={handleChangeImage}
-                  className="w-full outline-0 border border-gray-300 text-sm h-10 rounded-md px-2"
+                  className="bg-background w-full outline-0 border border-gray-300 text-sm h-10 rounded-md px-2"
                 />
               </div>
             </div>
@@ -252,7 +252,7 @@ const EditProfile = () => {
                 name="username"
                 value={userData.username}
                 onChange={handleChange}
-                className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
+                className="bg-background outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
               />
             </div>
             <div className="mb-6">
@@ -266,7 +266,7 @@ const EditProfile = () => {
                 value={userData.email}
                 onChange={handleChange}
                 readOnly
-                className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3 bg-gray-100"
+                className="bg-background outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3 bg-gray-100"
               />
             </div>
             <div className="mb-6">
@@ -279,7 +279,7 @@ const EditProfile = () => {
                 name="dob"
                 value={userData.dob}
                 onChange={handleChange}
-                className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
+                className="bg-background outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
               />
             </div>
             <div className="mb-6">
@@ -303,7 +303,7 @@ const EditProfile = () => {
                 id="cv"
                 name="cv"
                 onChange={handleChangeCv}
-                className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
+                className="bg-background outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3"
               />
             </div>
             <div className="mb-6 flex md:flex-row flex-col md:items-center md:gap-5 gap-6">
@@ -316,7 +316,7 @@ const EditProfile = () => {
                   id="province"
                   value={userData.province}
                   onChange={handleChange}
-                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                  className="bg-background w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 >
                   <option value="">- Select Province -</option>
                   {provinceData.map((item) => (
@@ -335,7 +335,7 @@ const EditProfile = () => {
                   id="city"
                   value={userData.city}
                   onChange={handleChange}
-                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                  className="bg-background w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 >
                   <option value="">- Select City -</option>
                   {cityData?.map((item, index) => (
@@ -357,7 +357,7 @@ const EditProfile = () => {
                   value={userData.district}
                   onChange={handleChange}
                   id="district"
-                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                  className="bg-background w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                 />
               </div>
               <div className="flex-1">
@@ -370,7 +370,7 @@ const EditProfile = () => {
                   value={userData.postalCode}
                   onChange={handleChange}
                   id="postalCode"
-                  className="w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
+                  className="bg-background w-full outline-0 bg-transparent border border-gray-300 rounded-md h-10 px-2 mt-3 text-sm"
                   min={1}
                 />
               </div>
@@ -412,7 +412,7 @@ const EditProfile = () => {
                 name="about"
                 value={userData.about}
                 onChange={handleChange}
-                className="outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3 resize-none py-2 h-32"
+                className="bg-background outline-0 border border-gray-300 rounded-md h-10 text-sm px-2 w-full mt-3 resize-none py-2 h-32"
               />
             </div>
             <button

@@ -23,7 +23,7 @@ const CVModal = ({ openModal, setOpenModal, file }: IProps) => {
   
   return (
     <div className={`${openModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} modal-background`}>
-      <div ref={modalRef} className={`${openModal ? 'translate-y-0' : '-translate-y-12'} modal-box max-w-[700px] max-h-[550px] overflow-auto hide-scrollbar`}>
+      <div ref={modalRef} className={`${openModal ? 'translate-y-0' : '-translate-y-12'} bg-background modal-box max-w-[700px] max-h-[550px] overflow-auto hide-scrollbar`}>
         <PDFViewer file={file} />
       </div>
     </div>

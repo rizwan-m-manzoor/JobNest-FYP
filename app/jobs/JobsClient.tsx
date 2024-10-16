@@ -100,7 +100,7 @@ const JobsClient = ({ data, searchParams }: IProps) => {
       </Head>
       <Navbar />
       <div className="md:py-10 py-7 md:px-16 px-5">
-        <div className="w-full m-auto bg-white shadow-xl border border-gray-200 md:rounded-full rounded-md md:h-16 h-auto md:py-0 py-6 px-4">
+        <div className="w-full m-auto bg-background shadow-md border border-gray-200 md:rounded-full rounded-md md:h-16 h-auto md:py-0 py-6 px-4">
           <form
             onSubmit={handleFilter}
             className="flex md:flex-row flex-col justify-between items-center h-full gap-3"
@@ -112,7 +112,7 @@ const JobsClient = ({ data, searchParams }: IProps) => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Job title or keyword"
-                className="outline-0 h-full px-2 w-full text-sm"
+                className="bg-background outline-0 h-full px-2 w-full text-sm"
               />
             </div>
             <button className="bg-[#504ED7] hover:bg-[#2825C2] transition-[background] text-white text-sm px-6 py-2 rounded-full outline-0">
@@ -130,7 +130,7 @@ const JobsClient = ({ data, searchParams }: IProps) => {
         setMinSalary={setMinSalary}
         handleFilter={handleFilter}
       />
-      <div className="bg-gray-100 pt-10 pb-7 md:px-16 px-5">
+      <div className="bg-background pt-10 pb-7 md:px-16 px-5">
         {jobs.length === 0 ? (
           <div className="bg-red-500 text-center text-white rounded-md py-3">
             There's no job available.

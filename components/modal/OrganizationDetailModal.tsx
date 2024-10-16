@@ -58,7 +58,7 @@ const OrganizationDetailModal = ({
         ref={modalRef}
         className={`${
           openModal ? "translate-y-0" : "-translate-y-12"
-        } modal-box max-w-[600px] max-h-[600px] overflow-auto hide-scrollbar`}
+        } bg-background modal-box max-w-[600px] max-h-[600px] overflow-auto hide-scrollbar`}
       >
         <div className="modal-box-header">
           <h1 className="text-lg font-medium">Organization Detail</h1>
